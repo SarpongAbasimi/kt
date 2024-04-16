@@ -12,4 +12,6 @@
         rather than focus on the process of the UI\'s construction,
         such as initializing an element and then attaching it to a parent.
         To create a Composable function, you add the @Composable annotation to the function name.</string>
+    <string name="all_tasks_text_one">All tasks completed</string>
+    <string name="text_two">Nice work!</string>
 </resources>

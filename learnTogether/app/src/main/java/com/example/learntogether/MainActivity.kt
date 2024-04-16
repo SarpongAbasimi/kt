@@ -12,7 +12,8 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val article = Article()
+        val article: Article = Article()
+        val taskManager: TaskManager = TaskManager()
         super.onCreate(savedInstanceState)
         setContent {
             LearnTogetherTheme {
@@ -21,9 +22,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    article.Page(stringResource(R.string.title),
-                        stringResource(R.string.first_text),
-                        stringResource(R.string.last_text), Modifier)
+                    taskManager.CreateManager(
+                        text = stringResource(R.string.all_tasks_text_one),
+                        secondText = stringResource(R.string.text_two) ,
+                        modifier = Modifier
+                    )
                 }
             }
         }
