@@ -23,17 +23,6 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    composeQuadrant.Page(
-                        stringResource(R.string.title_one),
-                        stringResource(R.string.title_two),
-                        stringResource(R.string.title_three),
-                        stringResource(R.string.title_four),
-                        stringResource(R.string.body_one),
-                        stringResource(R.string.body_two),
-                        stringResource(R.string.body_three),
-                        stringResource(R.string.body_four),
-                        modifier = Modifier
-                    )
                 }
             }
         }
