@@ -14,4 +14,12 @@
         To create a Composable function, you add the @Composable annotation to the function name.</string>
     <string name="all_tasks_text_one">All tasks completed</string>
     <string name="text_two">Nice work!</string>
+    <string name="title_one">Text composable</string>
+    <string name="title_two">Image composable</string>
+    <string name="title_three">Row composable</string>
+    <string name="title_four">Column composable</string>
+    <string name="body_one">Displays text and follows the recommended Material Design guidelines.</string>
+    <string name="body_two">Creates a composable that lays out and draws a given Painter class object.</string>
+    <string name="body_three">A layout composable that places its children in a horizontal sequence.</string>
+    <string name="body_four">A layout composable that places its children in a vertical sequence.</string>
 </resources>
