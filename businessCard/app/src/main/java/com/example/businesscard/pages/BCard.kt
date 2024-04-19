@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.businesscard.R
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material3.Icon
 
 class BCard {
 
@@ -33,6 +38,7 @@ class BCard {
                 name = "Jennifer Doe",
                 title = "Andriod Developer Extraordinaire",
                 modifier = Modifier.weight(3f),
+                iconImageResource = R.drawable.android_logo,
                 backgroundColor = Color.DarkGray
             )
 
@@ -46,19 +52,19 @@ class BCard {
                 ContactDetails(
                     "contact",
                     "+11(123) 444 555 666",
-                    R.drawable.android_logo,
+                    R.drawable.call_fill0_wght400_grad0_opsz24,
                     Modifier
                 )
                 ContactDetails(
                     "profile",
                     "AndriodDev",
-                    R.drawable.android_logo,
+                    R.drawable.share_fill0_wght400_grad0_opsz24,
                     Modifier
                 )
                 ContactDetails(
                     "email",
                     "jen.doe@andriod.com",
-                    R.drawable.android_logo,
+                    R.drawable.mail_fill0_wght400_grad0_opsz24,
                     Modifier
                 )
             }
@@ -66,7 +72,7 @@ class BCard {
     }
 
     @Composable
-    fun Info(name: String, title: String, modifier: Modifier, backgroundColor: Color){
+    fun Info(name: String, title: String, iconImageResource: Int, modifier: Modifier, backgroundColor: Color){
         Column(
             modifier
                 .fillMaxSize(),
@@ -74,7 +80,7 @@ class BCard {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(painter = painterResource(
-                id =  R.drawable.android_logo),
+                id =  iconImageResource),
                 contentDescription =  null,
                 modifier = Modifier
                     .background(backgroundColor)
@@ -107,22 +113,22 @@ class BCard {
                 Image(
                     painter = painterResource(id = imageResource) ,
                     contentDescription = description,
-                    modifier =  modifier
+                    modifier = modifier
                         .size(20.dp)
-
                         .weight(1f),
                     alignment = Alignment.TopEnd
                 )
+                Spacer(modifier = modifier.size(20.dp))
                 Text(
                     text = text,
-                    modifier =  modifier
-
+                    modifier = modifier
                         .padding(start = 5.dp)
                         .weight(2f)
                 )
 
         }
     }
+
 
     @Preview(showBackground = true)
     @Composable
