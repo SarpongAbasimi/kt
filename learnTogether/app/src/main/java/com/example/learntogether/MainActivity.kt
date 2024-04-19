@@ -12,9 +12,6 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        val article: Article = Article()
-        val taskManager: TaskManager = TaskManager()
-        val composeQuadrant = ComposeQuadrant()
         super.onCreate(savedInstanceState)
         setContent {
             LearnTogetherTheme {
@@ -23,6 +20,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    Dice().DiceApp()
                 }
             }
         }
