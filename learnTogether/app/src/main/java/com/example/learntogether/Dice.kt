@@ -44,7 +44,7 @@ class Dice {
             ,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Text(text = "You played ${tracker} 😊")
+            Text(text = "You played $tracker 😊")
 
             Image(painter = painterResource(id = imageResource) , contentDescription = "dice")
             Spacer(modifier = Modifier.height(16.dp))
