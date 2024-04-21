@@ -23,4 +23,6 @@
     <string name="body_three">A layout composable that places its children in a horizontal sequence.</string>
     <string name="body_four">A layout composable that places its children in a vertical sequence.</string>
     <string name="roll">Roll</string>
+    <string name="calculate_tip">Calculate Tip</string>
+    <string name="tip_time_amount">Tip Amount: %s</string>
 </resources>
