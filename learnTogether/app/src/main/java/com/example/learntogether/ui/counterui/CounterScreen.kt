@@ -9,6 +9,8 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -22,22 +24,25 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 @Composable
 fun CounterScreen(viewModel: CounterViewModel = viewModel(), modifier: Modifier){
+    val appState: CounterUiState by viewModel.uiState.collectAsState()
+
     Column(
         modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ){
-        CounterCard(viewModel.counter.value, modifier)
-        IncrementButton({
-            viewModel.counter.value = (viewModel.counter.value.toInt() + 1).toString()
-        }, modifier)
+        CounterCard(appState.counter, modifier)
+        IncrementButton(
+            { viewModel.increaseCounter() },
+            modifier
+        )
     }
 }
 
 @Composable
-fun CounterCard(counter: String, modifier: Modifier){
+fun CounterCard(counter: Int, modifier: Modifier){
     Text(
-        text = counter,
+        text = counter.toString(),
         modifier
             .background(MaterialTheme.colorScheme.primaryContainer)
             .width(30.dp),
