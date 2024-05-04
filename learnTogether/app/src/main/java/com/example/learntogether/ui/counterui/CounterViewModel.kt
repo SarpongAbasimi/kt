@@ -12,7 +12,7 @@ class CounterViewModel: ViewModel() {
 
     fun increaseCounter(): Unit {
         _uiState.update { state ->
-            state.copy(counter = state.counter + 1)
+            state.copy(counter = state.counter.inc())
         }
     }
 }
