@@ -23,7 +23,7 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 
 @Composable
-fun CounterScreen(viewModel: CounterViewModel = viewModel(), modifier: Modifier){
+fun CounterScreen(modifier: Modifier, viewModel: CounterViewModel = viewModel(),){
     val appState: CounterUiState by viewModel.uiState.collectAsState()
 
     Column(
@@ -60,8 +60,7 @@ fun IncrementButton(incrementFunc:() -> Unit, modifier: Modifier){
 @Preview(showBackground = true)
 @Composable
 fun CounterPreview(modifier: Modifier = Modifier){
-    val theViewModel =  CounterViewModel()
     LearnTogetherTheme {
-        CounterScreen(theViewModel, modifier)
+        CounterScreen(modifier)
     }
 }
