@@ -2,17 +2,15 @@ package com.example.learntogether.ui.navigationui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import com.example.learntogether.ui.theme.LearnTogetherTheme
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.learntogether.model.NavUiNav
+import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 
 @Composable
@@ -28,15 +26,17 @@ fun MainAppScreen(navController: NavHostController = rememberNavController()){
         composable("two"){
             NavCard(
                 cardData = "This is card two",
-                modifier =Modifier.background(Color.Blue),
-                onNextClick = { navController.navigate("three")}
+                modifier =Modifier.fillMaxSize().background(Color.Blue),
+                onNextClick = { navController.navigate("three")},
+                onBackClick = {navController.popBackStack()}
             )
         }
         composable("three"){
             NavCard(
                 cardData = "This is card three",
-                modifier =Modifier,
-                onNextClick = { navController.navigate("three")}
+                modifier =Modifier.fillMaxSize(),
+                onNextClick = { navController.navigate("three")},
+                onBackClick = {navController.popBackStack()}
             )
         }
     }
