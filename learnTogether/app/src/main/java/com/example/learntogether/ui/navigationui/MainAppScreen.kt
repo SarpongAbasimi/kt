@@ -10,32 +10,33 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.learntogether.model.NavUiNav
 import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 
 @Composable
 fun MainAppScreen(navController: NavHostController = rememberNavController()){
-    NavHost(navController = navController, startDestination = "one") {
-      composable(route = "one"){
+    NavHost(navController = navController, startDestination = NavUiNav.NavOne.name) {
+      composable(route = NavUiNav.NavOne.name){
           NavCard(
               cardData = "This is card One",
               modifier =Modifier.fillMaxSize(),
-              onNextClick = { navController.navigate("two")}
+              onNextClick = { navController.navigate(NavUiNav.NavTwo.name)}
           )
       }
-        composable("two"){
+        composable(NavUiNav.NavTwo.name){
             NavCard(
                 cardData = "This is card two",
                 modifier =Modifier.fillMaxSize().background(Color.Blue),
-                onNextClick = { navController.navigate("three")},
+                onNextClick = { navController.navigate(NavUiNav.NavThree.name)},
                 onBackClick = {navController.popBackStack()}
             )
         }
-        composable("three"){
+        composable(NavUiNav.NavThree.name){
             NavCard(
                 cardData = "This is card three",
                 modifier =Modifier.fillMaxSize(),
-                onNextClick = { navController.navigate("three")},
+                onNextClick = { navController.navigate(NavUiNav.NavThree.name)},
                 onBackClick = {navController.popBackStack()}
             )
         }
