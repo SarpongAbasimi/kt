@@ -56,4 +56,7 @@
     <string name="two">two</string>
     <string name="three">three</string>
     <string name="subtotal">Subtotal %s</string>
+    <string name="one_cupcake">One Cupcake</string>
+    <string name="six_cupcakes">Six Cupcakes</string>
+    <string name="twelve_cupcakes">Twelve Cupcakes</string>
 </resources>

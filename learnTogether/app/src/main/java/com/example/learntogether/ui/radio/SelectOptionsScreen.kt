@@ -23,8 +23,8 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 @Composable
 fun SelectOptionScreen(
-    data: List<String>,
-    subtotal: String,
+    data: List<String> = listOf(),
+    subtotal: String = "",
     onClickCancel: () -> Unit = {},
     onClickNext: () -> Unit = {},
     modifier: Modifier = Modifier
