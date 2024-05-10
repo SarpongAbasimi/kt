@@ -11,6 +11,10 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,16 +24,19 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 @Composable
 fun SelectOptionScreen(
     data: List<String> = listOf<String>(),
-    onHandleClick: ()-> Unit = {},
     subtotal: String,
     modifier: Modifier = Modifier
 ){
+    var selectOptionState: String by rememberSaveable { mutableStateOf("") }
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         data.forEach { text ->
-            OptionsCards(onHandleClick, text)
+            OptionsCards({
+                selectOptionState = text
+            }, text, selectOptionState)
         }
 
         Divider(
@@ -65,14 +72,18 @@ fun SelectOptionScreen(
 @Composable
 fun OptionsCards(
     handleOnClick: () -> Unit,
-    radioButtonText: String
+    radioButtonText: String,
+    state: String
 ){
     Column {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth()
         ) {
-            RadioButton(selected = false, onClick = handleOnClick)
+            RadioButton(
+                selected = radioButtonText == state,
+                onClick = handleOnClick
+            )
             Text(text = radioButtonText)
         }
     }
