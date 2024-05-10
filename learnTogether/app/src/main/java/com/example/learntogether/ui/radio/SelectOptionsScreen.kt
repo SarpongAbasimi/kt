@@ -1,11 +1,13 @@
 package com.example.learntogether.ui.radio
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,9 +21,13 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 fun SelectOptionScreen(
     data: List<String> = listOf<String>(),
     onHandleClick: ()-> Unit = {},
-    subtotal: String
+    subtotal: String,
+    modifier: Modifier = Modifier
 ){
-    Column(Modifier.fillMaxSize()) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
         data.forEach { text ->
             OptionsCards(onHandleClick, text)
         }
@@ -32,8 +38,27 @@ fun SelectOptionScreen(
             )
         Text(
             text = subtotal,
-            Modifier.align(Alignment.End).padding(end = 18.dp),
+            Modifier
+                .align(Alignment.End)
+                .padding(
+                    top = 18.dp,
+                    bottom = 18.dp,
+                    end = 10.dp
+                )
         )
+
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.Bottom,
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            OutlinedButton(onClick = { /*TODO*/ }, modifier = Modifier.weight(1f)) {
+                Text(text = "Cancel")
+            }
+            Button(onClick = { /*TODO*/ }, modifier = Modifier.weight(1f)) {
+                Text(text = "Next")
+            }
+        }
     }
 }
 
