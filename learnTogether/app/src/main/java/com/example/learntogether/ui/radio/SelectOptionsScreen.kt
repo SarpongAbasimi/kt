@@ -23,8 +23,10 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 @Composable
 fun SelectOptionScreen(
-    data: List<String> = listOf<String>(),
+    data: List<String>,
     subtotal: String,
+    onClickCancel: () -> Unit = {},
+    onClickNext: () -> Unit = {},
     modifier: Modifier = Modifier
 ){
     var selectOptionState: String by rememberSaveable { mutableStateOf("") }
@@ -59,10 +61,10 @@ fun SelectOptionScreen(
             verticalAlignment = Alignment.Bottom,
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            OutlinedButton(onClick = { /*TODO*/ }, modifier = Modifier.weight(1f)) {
+            OutlinedButton(onClick = onClickCancel, modifier = Modifier.weight(1f)) {
                 Text(text = "Cancel")
             }
-            Button(onClick = { /*TODO*/ }, modifier = Modifier.weight(1f)) {
+            Button(onClick = onClickNext, modifier = Modifier.weight(1f)) {
                 Text(text = "Next")
             }
         }
