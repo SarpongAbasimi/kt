@@ -20,7 +20,7 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 @Composable
 fun StartOrderScreen(
     data: List<Pair<Int, Int>>,
-    onNextClick: () -> Unit,
+    onNextClick: (input: Int) -> Unit,
     modifier: Modifier = Modifier
 ){
     Column(
@@ -31,7 +31,10 @@ fun StartOrderScreen(
         Text(text = "Cupcakes", Modifier.padding(bottom = 15.dp))
         Column {
             data.forEach {item ->
-                SelectQuantityButton(item.first, onNextClick)
+                SelectQuantityButton(
+                    item.first,
+                    { onNextClick(item.second) }
+                )
             }
         }
     }

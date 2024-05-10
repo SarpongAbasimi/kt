@@ -1,6 +1,8 @@
 package com.example.learntogether.ui.radio
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -9,12 +11,15 @@ import androidx.navigation.compose.rememberNavController
 import com.example.learntogether.data.CupCakeDataSource
 import com.example.learntogether.model.CupCakeRoute
 import com.example.learntogether.ui.theme.LearnTogetherTheme
-
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
 fun CupCakeScreen(
+    viewModel: CupCakeViewModel = viewModel(),
     navController: NavHostController =  rememberNavController()
 ){
+    val theViewModel by viewModel.state.collectAsState()
+
     NavHost(
         navController = navController,
         startDestination = CupCakeRoute.StartOrderScreenRoute.name
@@ -22,7 +27,8 @@ fun CupCakeScreen(
         composable(CupCakeRoute.StartOrderScreenRoute.name){
             StartOrderScreen(
                 data = CupCakeDataSource.cupCakeQuantityOptions,
-                {
+                { input ->
+                    viewModel.updateQuantity(input)
                     navController.navigate(CupCakeRoute.SelectFlavourScreen.name)
                 }
             )
