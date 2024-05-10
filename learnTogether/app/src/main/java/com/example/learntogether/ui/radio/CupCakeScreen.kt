@@ -20,10 +20,15 @@ fun CupCakeScreen(
         startDestination = CupCakeRoute.StartOrderScreenRoute.name
     ) {
         composable(CupCakeRoute.StartOrderScreenRoute.name){
-            StartOrderScreen(data = CupCakeDataSource.cupCakeQuantityOptions)
+            StartOrderScreen(
+                data = CupCakeDataSource.cupCakeQuantityOptions,
+                {
+                    navController.navigate(CupCakeRoute.SelectFlavourScreen.name)
+                }
+            )
         }
         composable(CupCakeRoute.SelectFlavourScreen.name){
-            SelectOptionScreen()
+            SelectOptionScreen(CupCakeDataSource.cupCakeFlavourOptions)
         }
     }
 }
