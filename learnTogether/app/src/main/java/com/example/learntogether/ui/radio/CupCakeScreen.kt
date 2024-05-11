@@ -18,7 +18,7 @@ fun CupCakeScreen(
     viewModel: CupCakeViewModel = viewModel(),
     navController: NavHostController =  rememberNavController()
 ){
-    val theViewModel by viewModel.state.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     NavHost(
         navController = navController,
@@ -34,7 +34,10 @@ fun CupCakeScreen(
             )
         }
         composable(CupCakeRoute.SelectFlavourScreen.name){
-            SelectOptionScreen(CupCakeDataSource.cupCakeFlavourOptions)
+            SelectOptionScreen(
+                CupCakeDataSource.cupCakeFlavourOptions,
+                subtotal = state.price.toString()
+            )
         }
     }
 }
