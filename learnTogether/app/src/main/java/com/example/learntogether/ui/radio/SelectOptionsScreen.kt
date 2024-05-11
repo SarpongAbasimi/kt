@@ -18,7 +18,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,7 +30,7 @@ fun SelectOptionScreen(
     data: List<String> = listOf(),
     subtotal: String = "",
     onClickCancel: () -> Unit = {},
-    onClickNext: () -> Unit = {},
+    onClickNext: (input: String) -> Unit = {},
     @StringRes title: Int = 0,
     modifier: Modifier = Modifier
 ){
@@ -79,7 +78,7 @@ fun SelectOptionScreen(
             OutlinedButton(onClick = onClickCancel, modifier = Modifier.weight(1f)) {
                 Text(text = "Cancel")
             }
-            Button(onClick = onClickNext, modifier = Modifier.weight(1f)) {
+            Button(onClick = { onClickNext(selectOptionState) }, modifier = Modifier.weight(1f)) {
                 Text(text = "Next")
             }
         }
@@ -109,7 +108,6 @@ fun OptionsCards(
 @Preview(showBackground = true)
 @Composable
 fun SelectOptionPreview(){
-   val context =  LocalContext.current
     LearnTogetherTheme {
         SelectOptionScreen(
             listOf(

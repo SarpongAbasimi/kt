@@ -18,10 +18,18 @@ class CupCakeViewModel: ViewModel() {
     var state: StateFlow<CupCakeState> = _uiState.asStateFlow()
 
     fun updateQuantity(value: Int){
-        _uiState.update { cupcake ->
+        _uiState.update { cupcake: CupCakeState ->
             cupcake.copy(
                 quantity = value,
                 price = calculateTotal(value)
+            )
+        }
+    }
+
+    fun updateFlavour(flavour: String){
+        _uiState.update { cupcake ->
+            cupcake.copy(
+                flavour = flavour
             )
         }
     }
