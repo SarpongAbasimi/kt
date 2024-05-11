@@ -26,7 +26,8 @@ class CupCakeViewModel: ViewModel() {
         }
     }
 
-    fun calculateTotal(quantity: Int): Double {
+    private fun calculateTotal(quantity: Int): Double {
      return PRICE_PER_CUPCAKE * quantity
     }
+
 }

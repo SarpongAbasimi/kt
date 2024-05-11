@@ -12,6 +12,8 @@ import com.example.learntogether.data.CupCakeDataSource
 import com.example.learntogether.model.CupCakeRoute
 import com.example.learntogether.ui.theme.LearnTogetherTheme
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.learntogether.R
 
 @Composable
 fun CupCakeScreen(
@@ -36,10 +38,18 @@ fun CupCakeScreen(
         composable(CupCakeRoute.SelectFlavourScreen.name){
             SelectOptionScreen(
                 CupCakeDataSource.cupCakeFlavourOptions,
-                subtotal = state.price.toString()
+                subtotal = state.price.toString(),
+                onClickCancel = {
+                    handleOnclickCancel(navController)
+                },
+                title = R.string.chose_flavor
             )
         }
     }
+}
+
+fun handleOnclickCancel(navController: NavController){
+    navController.popBackStack(CupCakeRoute.StartOrderScreenRoute.name, false)
 }
 
 

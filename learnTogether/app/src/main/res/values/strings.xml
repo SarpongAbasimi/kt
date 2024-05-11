@@ -59,4 +59,6 @@
     <string name="one_cupcake">One Cupcake</string>
     <string name="six_cupcakes">Six Cupcakes</string>
     <string name="twelve_cupcakes">Twelve Cupcakes</string>
+    <string name="select_cupcake_quantity">Select Cupcake Quantity</string>
+    <string name="chose_flavor">Chose Flavor</string>
 </resources>

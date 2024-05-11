@@ -1,5 +1,6 @@
 package com.example.learntogether.ui.radio
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +18,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.learntogether.R
@@ -29,6 +32,7 @@ fun SelectOptionScreen(
     subtotal: String = "",
     onClickCancel: () -> Unit = {},
     onClickNext: () -> Unit = {},
+    @StringRes title: Int = 0,
     modifier: Modifier = Modifier
 ){
     var selectOptionState: String by rememberSaveable { mutableStateOf("") }
@@ -37,6 +41,15 @@ fun SelectOptionScreen(
         modifier = modifier,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
+        Text(text = stringResource(title),
+            modifier = Modifier
+                .padding(
+                    bottom = 10.dp,
+                    start = 15.dp,
+                    top = 5.dp
+                ),
+            fontWeight = FontWeight.Bold
+        )
         data.forEach { text ->
             OptionsCards({
                 selectOptionState = text
@@ -96,6 +109,7 @@ fun OptionsCards(
 @Preview(showBackground = true)
 @Composable
 fun SelectOptionPreview(){
+   val context =  LocalContext.current
     LearnTogetherTheme {
         SelectOptionScreen(
             listOf(
