@@ -4,16 +4,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.learntogether.R
 import com.example.learntogether.data.CupCakeDataSource
 import com.example.learntogether.model.CupCakeRoute
 import com.example.learntogether.ui.theme.LearnTogetherTheme
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavController
-import com.example.learntogether.R
 
 @Composable
 fun CupCakeScreen(
@@ -42,8 +42,18 @@ fun CupCakeScreen(
                 onClickCancel = {
                     handleOnclickCancel(navController)
                 },
-                onClickNext = { input -> viewModel.updateFlavour(input) },
+                onClickNext = { input ->
+                    viewModel.updateFlavour(input)
+                    navController.navigate(CupCakeRoute.SelectDateScreen.name)
+                              },
                 title = R.string.chose_flavor
+            )
+        }
+        composable(CupCakeRoute.SelectDateScreen.name){
+            SelectOptionScreen(
+                data = CupCakeDataSource.generateCalenderDates(),
+                subtotal = state.price.toString(),
+                title = R.string.choose_pickup_date
             )
         }
     }

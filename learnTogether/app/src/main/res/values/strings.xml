@@ -61,4 +61,5 @@
     <string name="twelve_cupcakes">Twelve Cupcakes</string>
     <string name="select_cupcake_quantity">Select Cupcake Quantity</string>
     <string name="chose_flavor">Chose Flavor</string>
+    <string name="choose_pickup_date">Choose Pickup Date</string>
 </resources>
