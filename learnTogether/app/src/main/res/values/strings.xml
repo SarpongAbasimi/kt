@@ -62,4 +62,8 @@
     <string name="select_cupcake_quantity">Select Cupcake Quantity</string>
     <string name="chose_flavor">Chose Flavor</string>
     <string name="choose_pickup_date">Choose Pickup Date</string>
+    <string name="quantity">QUANTITY</string>
+    <string name="flavour">FLAVOUR</string>
+    <string name="pickup_date">PICKUP DATE</string>
+    <string name="order_summary">Order Summary</string>
 </resources>
