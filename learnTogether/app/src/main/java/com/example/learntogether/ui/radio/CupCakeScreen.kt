@@ -50,8 +50,14 @@ fun CupCakeScreen(
                 subtotal = state.price.toString(),
                 title = R.string.choose_pickup_date,
                 onClickCancel = { handleOnclickCancel(navController)},
-                onClickNext = { viewModel.updateOrderData(it)}
+                onClickNext = {
+                    viewModel.updateOrderData(it)
+                    navController.navigate(CupCakeRoute.SelectSummaryScreen.name)
+                }
             )
+        }
+        composable(CupCakeRoute.SelectSummaryScreen.name){
+            OrderSummary(state) { handleOnclickCancel(navController) }
         }
     }
 }

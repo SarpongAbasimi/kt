@@ -25,7 +25,10 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 
 @Composable
-fun OrderSummary(state: CupCakeState){
+fun OrderSummary(
+    state: CupCakeState,
+    handleOnCancel: ()-> Unit
+){
     Column(modifier = Modifier.fillMaxSize()) {
         Text(text = stringResource(R.string.order_summary), Modifier.padding(10.dp))
         TextWithDivider(stringResource(R.string.quantity), state.quantity.toString(), Modifier)
@@ -50,7 +53,7 @@ fun OrderSummary(state: CupCakeState){
                 Text(text = "Send Order To Another App")
             }
 
-            OutlinedButton(onClick = { /*TODO*/ }, Modifier.widthIn(300.dp)) {
+            OutlinedButton(onClick = handleOnCancel, Modifier.widthIn(300.dp)) {
                 Text(text = "Cancel")
             }
         }
@@ -81,7 +84,7 @@ fun TextWithDivider(
 @Composable
 fun OrderSummaryPreview(){
     LearnTogetherTheme {
-        OrderSummary(CupCakeState())
+        OrderSummary(CupCakeState(), handleOnCancel = {})
     }
 }
 
