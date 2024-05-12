@@ -34,6 +34,14 @@ class CupCakeViewModel: ViewModel() {
         }
     }
 
+    fun updateOrderData(orderDate: String){
+        _uiState.update { cupCake: CupCakeState ->
+            cupCake.copy(
+                orderDate = orderDate
+            )
+        }
+    }
+
     private fun calculateTotal(quantity: Int): Double {
      return PRICE_PER_CUPCAKE * quantity
     }

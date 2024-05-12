@@ -29,8 +29,7 @@ fun CupCakeScreen(
         composable(CupCakeRoute.StartOrderScreenRoute.name){
             StartOrderScreen(
                 data = CupCakeDataSource.cupCakeQuantityOptions,
-                { input ->
-                    viewModel.updateQuantity(input)
+                { viewModel.updateQuantity(it)
                     navController.navigate(CupCakeRoute.SelectFlavourScreen.name)
                 }
             )
@@ -39,13 +38,9 @@ fun CupCakeScreen(
             SelectOptionScreen(
                 CupCakeDataSource.cupCakeFlavourOptions,
                 subtotal = state.price.toString(),
-                onClickCancel = {
-                    handleOnclickCancel(navController)
-                },
-                onClickNext = { input ->
-                    viewModel.updateFlavour(input)
-                    navController.navigate(CupCakeRoute.SelectDateScreen.name)
-                              },
+                onClickCancel = { handleOnclickCancel(navController) },
+                onClickNext = { viewModel.updateFlavour(it)
+                    navController.navigate(CupCakeRoute.SelectDateScreen.name) },
                 title = R.string.chose_flavor
             )
         }
@@ -53,7 +48,9 @@ fun CupCakeScreen(
             SelectOptionScreen(
                 data = CupCakeDataSource.generateCalenderDates(),
                 subtotal = state.price.toString(),
-                title = R.string.choose_pickup_date
+                title = R.string.choose_pickup_date,
+                onClickCancel = { handleOnclickCancel(navController)},
+                onClickNext = { viewModel.updateOrderData(it)}
             )
         }
     }
