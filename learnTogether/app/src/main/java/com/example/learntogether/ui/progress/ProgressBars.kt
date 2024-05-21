@@ -69,7 +69,8 @@ fun ProgressBarScreen(
             Modifier,
             "Start",
             "Reset",
-            { isRunning = !isRunning }
+            { isRunning = !isRunning },
+            isRunning
         )
     }
 }
@@ -113,7 +114,8 @@ private fun StartResetButton(
     modifier: Modifier,
     startText: String,
     resetText: String,
-    handleStartClick: () -> Unit
+    handleStartClick: () -> Unit,
+    isProgressRunning: Boolean
 ){
     Column (
         horizontalAlignment = Alignment
@@ -124,7 +126,7 @@ private fun StartResetButton(
     ){
         Button(onClick = handleStartClick,
             modifier = Modifier.widthIn(500.dp)) {
-            Text(text = startText)
+            Text(text = if(isProgressRunning) "Pause" else startText)
         }
         OutlinedButton(onClick = { /*TODO*/ },
             modifier = Modifier.widthIn(500.dp)) {

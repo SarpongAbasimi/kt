@@ -1,6 +1,5 @@
 package com.example.learntogether.ui.progress
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.learntogether.model.ProgressBarCounter
 import kotlinx.coroutines.delay
@@ -18,7 +17,6 @@ class ProgressBarViewModel: ViewModel() {
 
     suspend fun handleStartClick(){
         while (_uiState.value.progress < MAX_COUNTER){
-            Log.d("JustEat", "${state.value}")
             delay(500L)
             _uiState.update { record ->
                 record.copy(progress = _uiState.value.progress + 1)
