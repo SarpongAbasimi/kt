@@ -19,7 +19,7 @@ class ProgressBarViewModel: ViewModel() {
         while (_uiState.value.progress < MAX_COUNTER){
             delay(500L)
             _uiState.update { record ->
-                record.copy(progress = _uiState.value.progress + 1)
+                record.copy(progress = _uiState.value.progress + 2)
             }
         }
     }

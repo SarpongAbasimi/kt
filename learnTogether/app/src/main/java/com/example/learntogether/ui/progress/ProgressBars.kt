@@ -1,6 +1,5 @@
 package com.example.learntogether.ui.progress
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,19 +32,25 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.learntogether.model.ProgressBarCounter
 import com.example.learntogether.ui.theme.LearnTogetherTheme
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 @Composable()
 fun ProgressBarScreen(
-    progressBarViewModel: ProgressBarViewModel = viewModel()
+    progressBarViewModelOne: ProgressBarViewModel = viewModel(),
+    progressBarViewModelTwo: ProgressBarViewModel = viewModel()
 ){
-    val appState: State<ProgressBarCounter> = progressBarViewModel.state.collectAsState()
+    val appStateOne: State<ProgressBarCounter> = progressBarViewModelOne.state.collectAsState()
+    val appStateTwo: State<ProgressBarCounter> = progressBarViewModelTwo.state.collectAsState()
+
     var isRunning: Boolean by rememberSaveable {
         mutableStateOf(false)
     }
 
     if(isRunning){
         HandleLaunchEffect(
-            progressBarViewModel,
+            progressBarViewModelOne,
+            progressBarViewModelTwo,
             { isRunning = false }
         )
     }
@@ -61,9 +66,19 @@ fun ProgressBarScreen(
         ProgressBar(
             Modifier,
             "Player One",
-            appState.value.progress.toString(),
-            appState.value.progress
+            appStateOne.value.progress.toString(),
+            appStateOne.value.progress
         )
+
+        Spacer(modifier = Modifier.size(10.dp))
+        
+        ProgressBar(
+            Modifier,
+            "Player Two",
+            appStateTwo.value.progress.toString(),
+            appStateTwo.value.progress
+        )
+
         Spacer(modifier = Modifier.size(10.dp))
         StartResetButton(
             Modifier,
@@ -75,9 +90,12 @@ fun ProgressBarScreen(
     }
 }
 @Composable
-fun HandleLaunchEffect(progressBarViewModel: ProgressBarViewModel, stateF: () -> Unit) {
-    LaunchedEffect(key1 = "player1") {
-        progressBarViewModel.handleStartClick()
+fun HandleLaunchEffect(progressBarViewModelOne: ProgressBarViewModel, progressBarViewModeTwo: ProgressBarViewModel, stateF: () -> Unit) {
+    LaunchedEffect(key1 = "player1", "player2") {
+        coroutineScope {
+            launch { progressBarViewModelOne.handleStartClick() }
+            launch { progressBarViewModeTwo.handleStartClick() }
+        }
         stateF()
     }
 }
@@ -103,7 +121,7 @@ fun ProgressBar(
                 )
                 Row {
                     Text(text = progressIncrement, Modifier.weight(1f), textAlign = TextAlign.Start)
-                    Text(text = "100", Modifier.weight(1f),textAlign = TextAlign.End)
+                    Text(text = "100%", Modifier.weight(1f),textAlign = TextAlign.End)
                 }
             }
         }
