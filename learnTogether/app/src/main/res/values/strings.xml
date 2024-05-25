@@ -66,4 +66,6 @@
     <string name="flavour">FLAVOUR</string>
     <string name="pickup_date">PICKUP DATE</string>
     <string name="order_summary">Order Summary</string>
+    <string name="loading">Loading</string>
+    <string name="check_internet_connection_and_try_again">Check internet connection and try again</string>
 </resources>
