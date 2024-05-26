@@ -46,14 +46,20 @@ fun HandleState(state: RequestStates){
             R.drawable.cloud_off_24dp_fill0_wght400_grad0_opsz24,
             Modifier
         )
-        is RequestStates.Success -> SuccessResponseScreen(state.result)
+        is RequestStates.Success -> SuccessResponseScreen(state.result, Modifier)
     }
 }
 
 
 @Composable
-fun SuccessResponseScreen(response: List<MarsPhoto>){
-    Text(text = "The result size is ${response.size}")
+fun SuccessResponseScreen(response: List<MarsPhoto>, modifier: Modifier){
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
+        Text(text = "The result size is ${response.size}")
+    }
 }
 
 
