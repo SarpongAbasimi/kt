@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.learntogether.R
 import com.example.learntogether.clients.HttpClient
+import com.example.learntogether.data.repository.MarsRepositoryService
 import com.example.learntogether.model.BaseUrl
 import com.example.learntogether.model.MarsPhoto
 import com.example.learntogether.model.RequestStates
@@ -81,7 +82,8 @@ fun MarsAppScreenPreview(){
     LearnTogetherTheme {
         val url: String = "https://android-kotlin-fun-mars-server.appspot.com"
         val marsHttpApi: MarHttpApi =  HttpClient.build(BaseUrl(url))
-        val viewModel: MarsViewModel = MarsViewModel(marsHttpApi)
+        val marsRepository = MarsRepositoryService(marsHttpApi)
+        val viewModel: MarsViewModel = MarsViewModel(marsRepository)
         MarsAppScreen(viewModel)
     }
 }
