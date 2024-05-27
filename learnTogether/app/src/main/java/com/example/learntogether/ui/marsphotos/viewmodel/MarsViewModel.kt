@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MarsViewModel(val marsRepository: MarsRepository): ViewModel() {
+class MarsViewModel(private val marsRepository: MarsRepository): ViewModel() {
     private val _uiState = MutableStateFlow<RequestStates>(RequestStates.Loading)
     val state: StateFlow<RequestStates> = _uiState.asStateFlow()
 
