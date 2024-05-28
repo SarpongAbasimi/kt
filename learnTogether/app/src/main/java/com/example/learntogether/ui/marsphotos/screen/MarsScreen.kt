@@ -1,6 +1,5 @@
 package com.example.learntogether.ui.marsphotos.screen
 
-import android.util.Log
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
