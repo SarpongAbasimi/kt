@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.learntogether.data.dao.InventoryDao
 import com.example.learntogether.model.Item
 
-@Database(entities = arrayOf(Item::class), version = 1)
+@Database(entities = arrayOf(Item::class), version = 1, exportSchema = false)
 abstract class InventoryDataBase : RoomDatabase() {
 
     abstract fun inventoryDao(): InventoryDao
