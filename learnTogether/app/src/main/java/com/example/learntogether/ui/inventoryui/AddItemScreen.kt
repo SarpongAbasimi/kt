@@ -1,5 +1,6 @@
 package com.example.learntogether.ui.inventoryui
 
+import android.icu.util.Currency
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.learntogether.model.ItemState
 import com.example.learntogether.ui.theme.LearnTogetherTheme
+import java.util.Locale
 
 @Composable
 fun AddItemScreen(addViewModel: AddItemViewModel = viewModel()){
@@ -43,7 +45,8 @@ fun AddItemScreen(addViewModel: AddItemViewModel = viewModel()){
             state.price,
             { price -> addViewModel.handleValueChange(state.copy(price = price))},
             "Item Price",
-            KeyboardOptions(keyboardType = KeyboardType.Decimal)
+            KeyboardOptions(keyboardType = KeyboardType.Decimal),
+            leadingIcon = { Text(Currency.getInstance(Locale.getDefault()).symbol) }
         )
         Spacer(modifier = Modifier.size(20.dp))
         TextFields(
@@ -66,7 +69,8 @@ fun TextFields(
     textInput: String,
     handleValueChange: (String)-> Unit,
     labelText:  String,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    leadingIcon: @Composable (() -> Unit)? = null,
 ){
     OutlinedTextField(
         value = textInput ,
@@ -79,7 +83,8 @@ fun TextFields(
             disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
         ),
         keyboardOptions = keyboardOptions,
-        singleLine = true
+        singleLine = true,
+        leadingIcon = leadingIcon,
     )
 }
 
