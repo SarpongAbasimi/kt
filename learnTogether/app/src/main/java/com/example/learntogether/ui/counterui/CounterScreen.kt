@@ -23,7 +23,7 @@ import com.example.learntogether.ui.theme.LearnTogetherTheme
 
 
 @Composable
-fun CounterScreen(modifier: Modifier, viewModel: CounterViewModel = viewModel(),){
+fun CounterScreen(modifier: Modifier, viewModel: CounterViewModel = viewModel()){
     val appState: CounterUiState by viewModel.uiState.collectAsState()
 
     Column(
