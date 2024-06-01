@@ -11,7 +11,6 @@ import com.example.learntogether.clients.HttpClient
 import com.example.learntogether.data.repository.MarsRepositoryService
 import com.example.learntogether.model.BaseUrl
 import com.example.learntogether.network.MarHttpApi
-import com.example.learntogether.ui.counterui.CounterScreen
 import com.example.learntogether.ui.marsphotos.screen.MarsAppScreen
 import com.example.learntogether.ui.marsphotos.viewmodel.MarsViewModel
 import com.example.learntogether.ui.theme.LearnTogetherTheme
