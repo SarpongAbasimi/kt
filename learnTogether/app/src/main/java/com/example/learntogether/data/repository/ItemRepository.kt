@@ -7,9 +7,9 @@ import kotlinx.coroutines.flow.Flow
 interface ItemRepository {
     suspend fun insert(input: Item): Unit
 
-    suspend fun find(id: Int): Flow<Item>
+    fun find(id: Int): Flow<Item>
 
-    suspend fun get(): Flow<List<Item>>
+    fun get(): Flow<List<Item>>
 }
 
 
@@ -18,11 +18,11 @@ class ItemRepositoryImp(private val inventoryDao: InventoryDao): ItemRepository 
         return inventoryDao.insert(input)
     }
 
-    override suspend fun find(id: Int): Flow<Item> {
+    override fun find(id: Int): Flow<Item> {
         return inventoryDao.find(id)
     }
 
-    override suspend fun get(): Flow<List<Item>> {
+    override fun get(): Flow<List<Item>> {
        return inventoryDao.get()
     }
 
