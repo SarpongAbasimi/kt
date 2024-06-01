@@ -8,13 +8,12 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface InventoryDao {
-
-    @Insert
+     @Insert
     suspend fun insert(input: Item): Unit
 
     @Query("SELECT * FROM item WHERE id= :id")
-    suspend fun find(id: Int): Flow<Item>
+    fun find(id: Int): Flow<Item>
 
     @Query("SELECT * FROM item")
-    suspend fun get(): Flow<List<Item>>
+    fun get(): Flow<List<Item>>
 }
