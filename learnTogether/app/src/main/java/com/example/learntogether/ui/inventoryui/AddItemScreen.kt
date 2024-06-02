@@ -83,7 +83,8 @@ fun AddItemEntryBody(
 
         Button(
             onClick = { /*TODO*/ },
-            modifier = Modifier.widthIn(350.dp)
+            modifier = Modifier.widthIn(350.dp),
+            enabled = addViewModel.handleValidEntry()
         ) {
             Text(text = "Save")
         }
