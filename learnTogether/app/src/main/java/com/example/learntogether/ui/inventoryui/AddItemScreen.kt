@@ -29,7 +29,14 @@ import java.util.Locale
 @Composable
 fun AddItemScreen(addViewModel: AddItemViewModel = viewModel()){
     val state: ItemState by addViewModel.addItemUiState.collectAsState()
+    AddItemEntryBody(state, addViewModel)
+}
 
+@Composable
+fun AddItemEntryBody(
+    state: ItemState,
+    addViewModel: AddItemViewModel
+){
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
