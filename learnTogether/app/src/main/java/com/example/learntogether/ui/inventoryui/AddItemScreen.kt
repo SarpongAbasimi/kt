@@ -1,9 +1,11 @@
 package com.example.learntogether.ui.inventoryui
 
 import android.icu.util.Currency
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
@@ -18,7 +20,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,7 +39,8 @@ fun AddItemScreen(addViewModel: AddItemViewModel = viewModel()){
 @Composable
 fun AddItemEntryBody(
     state: ItemState,
-    addViewModel: AddItemViewModel
+    addViewModel: AddItemViewModel,
+    enabled: Boolean = true
 ){
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -62,9 +67,24 @@ fun AddItemEntryBody(
             "Quantity in stock",
             KeyboardOptions(keyboardType = KeyboardType.Number)
         )
+
         Spacer(modifier = Modifier.size(20.dp))
 
-        Button(onClick = { /*TODO*/ }, modifier = Modifier.widthIn(350.dp)) {
+        if(enabled){
+            Text(
+                text = "*required fields",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 25.dp, bottom = 5.dp),
+                textAlign = TextAlign.Start
+            )
+        }
+        Spacer(modifier = Modifier.size(10.dp))
+
+        Button(
+            onClick = { /*TODO*/ },
+            modifier = Modifier.widthIn(350.dp)
+        ) {
             Text(text = "Save")
         }
     }
