@@ -13,8 +13,8 @@ abstract class InventoryDataBase : RoomDatabase() {
     abstract fun inventoryDao(): InventoryDao
 
     companion object {
-        fun createDb(context: Context) {
-            Room.databaseBuilder(
+        fun createDb(context: Context):InventoryDataBase  {
+            return Room.databaseBuilder(
                 context,
                 InventoryDataBase::class.java,
                 "item_database"
