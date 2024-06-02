@@ -35,15 +35,21 @@ class AddItemViewModel(
         return validator.isValidEntry(_addItemUiState.value)
     }
 
+    fun handleClearScreen(): Unit {
+        return _addItemUiState.update { state ->
+            state.copy(name = "", price = "", quantity = "")
+        }
+    }
+
     suspend fun handleSaveEntry(): Unit{
         if(handleValidEntry()) {
             return with(_addItemUiState.value){
                 repository
                     .insert(
                         Item(
+                            name = name,
                             price = price.toDouble(),
-                            quantity =
-                            quantity.toInt())
+                            quantity = quantity.toInt())
                     )
             }
         }

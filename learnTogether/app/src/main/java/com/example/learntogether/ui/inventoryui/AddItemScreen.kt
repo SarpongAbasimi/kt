@@ -40,6 +40,7 @@ fun AddItemScreen(addViewModel: AddItemViewModel = viewModel(factory = AddItemVi
         handleSave = {
             coroutineScope.launch{
                 addViewModel.handleSaveEntry()
+                addViewModel.handleClearScreen()
             }
         }
     )
@@ -85,7 +86,7 @@ fun AddItemEntryBody(
                 text = "*required fields",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 25.dp, bottom = 5.dp),
+                    .padding(start = 25.dp, bottom = 15.dp),
                 textAlign = TextAlign.Start
             )
         }
