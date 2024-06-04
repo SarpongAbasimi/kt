@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">todo</string>
+    <string name="floating_action_button">Floating action button.</string>
+</resources>
