@@ -2,7 +2,8 @@ package com.example.todo.container
 
 import android.content.Context
 import com.example.todo.dao.TodoDao
-import com.example.todo.database.AppDb
+import com.example.todo.database.AppDatabase
+
 import com.example.todo.repository.TodoRepository
 import com.example.todo.repository.TodoRepositoryImpl
 import com.example.todo.services.Validator
@@ -14,7 +15,7 @@ interface AppContainer {
 }
 
 class Container(context: Context): AppContainer {
-    private val dao: TodoDao = AppDb.create("todo_app", context).todoDao()
+    private val dao: TodoDao = AppDatabase.create("todo_app", context).todoDao()
 
     override val repository = TodoRepositoryImpl(dao)
     override val validator: Validator = ValidatorService()

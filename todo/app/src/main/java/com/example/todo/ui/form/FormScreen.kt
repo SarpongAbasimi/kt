@@ -17,6 +17,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -24,11 +26,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todo.R
+import com.example.todo.model.FormState
 import com.example.todo.ui.theme.TodoTheme
 
 @Composable
-fun FormScreen(handleNavigation: ()-> Unit){
+fun FormScreen(
+    handleNavigation: ()-> Unit,
+    formViewModel: FormViewModel = viewModel(factory = FormViewModel.Factory)
+){
+    val state: FormState by formViewModel.state.collectAsState()
+
     Box {
         Column(
             modifier = Modifier
@@ -41,8 +50,8 @@ fun FormScreen(handleNavigation: ()-> Unit){
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             OutlinedTextField(
-                value = "",
-                label = { TodoLabel(text = "What is on your mind")},
+                value = state.content,
+                label = { TodoLabel(text = stringResource(R.string.what_is_on_your_mind))},
                 onValueChange = {},
                 modifier = Modifier
                     .padding(
@@ -57,7 +66,8 @@ fun FormScreen(handleNavigation: ()-> Unit){
                 )
             )
             ElevatedButton(onClick = { /*TODO*/ },
-                modifier = Modifier.padding(top = 10.dp)
+                modifier = Modifier.padding(top = 10.dp),
+                enabled = state.isValid
             ) {
                 Text(text = "Add")
             }
