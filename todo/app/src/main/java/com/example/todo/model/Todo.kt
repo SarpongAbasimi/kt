@@ -9,7 +9,7 @@ import java.util.Calendar
 @Entity
 final data class Todo(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     val content: String,
     val timestamp: String = SimpleDateFormat("yyy-MM-dd HH:mm")
         .format(Calendar.getInstance().time)
