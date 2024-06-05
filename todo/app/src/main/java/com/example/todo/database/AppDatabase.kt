@@ -10,13 +10,13 @@ import com.example.todo.model.Todo
 @Database(entities = [Todo::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun todoDao(): TodoDao
-}
 
-object AppDb {
-    fun create(dbName:String, context:Context): AppDatabase {
-        return Room.databaseBuilder(
-            context,
-            AppDatabase::class.java, dbName
-        ).build()
+    companion object {
+        fun create(dbName:String, context:Context): AppDatabase {
+            return Room.databaseBuilder(
+                context,
+                AppDatabase::class.java, dbName
+            ).build()
+        }
     }
 }
