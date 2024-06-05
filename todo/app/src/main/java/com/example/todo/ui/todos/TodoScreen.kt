@@ -20,7 +20,7 @@ import com.example.todo.R
 import com.example.todo.ui.theme.TodoTheme
 
 @Composable
-fun TodoScreen(){
+fun TodoScreen(handleNavigation:()-> Unit){
     Box(modifier = Modifier.fillMaxSize()) {
         Column(modifier = Modifier
             .fillMaxSize()
@@ -34,7 +34,7 @@ fun TodoScreen(){
         }
 
         FloatingActionButton(
-            onClick = {},
+            onClick = handleNavigation,
             modifier = Modifier
                 .align(Alignment.BottomEnd)
                 .padding(bottom =
@@ -53,6 +53,6 @@ fun TodoScreen(){
 @Composable
 fun TodoScreenPreview(){
     TodoTheme {
-        TodoScreen()
+        TodoScreen({})
     }
 }
