@@ -17,13 +17,24 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import com.example.todo.ApplicationContainer
 import com.example.todo.container.AppContainer
+import kotlinx.coroutines.flow.update
 
-class FormViewModel(val repository: TodoRepository, val validator: Validator): ViewModel() {
+class FormViewModel(private val repository: TodoRepository, private val validator: Validator): ViewModel() {
     private val _state: MutableStateFlow<FormState> = MutableStateFlow<FormState>(FormState())
     val state: StateFlow<FormState> = _state.asStateFlow()
 
+    fun handleOnValueChange(data: String){
+        _state.update { formState ->
+            formState
+                .copy(
+                    content = data,
+                    isValid = validator.validate(data)
+                )
+        }
+    }
+
     fun handleFormSubmit() {
-        if(validator.validate(_state.value)){
+        if(validator.validate(_state.value.content)){
             try {
                 viewModelScope.launch {
                     repository.insert(Todo(content = state.value.content))
