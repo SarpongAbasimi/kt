@@ -33,7 +33,7 @@ import com.example.todo.ui.theme.TodoTheme
 
 @Composable
 fun FormScreen(
-    handleNavigation: ()-> Unit,
+    handleNavigationDown: ()-> Unit,
     formViewModel: FormViewModel = viewModel(factory = FormViewModel.Factory)
 ){
     val state: FormState by formViewModel.state.collectAsState()
@@ -66,7 +66,10 @@ fun FormScreen(
                     disabledContainerColor = MaterialTheme.colorScheme.secondaryContainer,
                 )
             )
-            ElevatedButton(onClick = { /*TODO*/ },
+            ElevatedButton(onClick = {
+                formViewModel.handleFormSubmit()
+                handleNavigationDown()
+            },
                 modifier = Modifier.padding(top = 10.dp),
                 enabled = state.isValid
             ) {
@@ -74,7 +77,7 @@ fun FormScreen(
             }
         }
 
-        FloatingActionButton(onClick = handleNavigation, Modifier.padding(
+        FloatingActionButton(onClick = handleNavigationDown, Modifier.padding(
             start = dimensionResource(id = R.dimen.padding_small),
             top = dimensionResource(id = R.dimen.padding_small)
         )){
