@@ -51,8 +51,9 @@ fun FormScreen(
         ) {
             OutlinedTextField(
                 value = state.content,
+                maxLines = 2,
                 label = { TodoLabel(text = stringResource(R.string.what_is_on_your_mind))},
-                onValueChange = {},
+                onValueChange = {formViewModel.handleOnValueChange(it)},
                 modifier = Modifier
                     .padding(
                         start = dimensionResource(id = R.dimen.padding_small),
