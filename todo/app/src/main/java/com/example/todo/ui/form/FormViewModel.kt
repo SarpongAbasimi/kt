@@ -37,7 +37,7 @@ class FormViewModel(private val repository: TodoRepository, private val validato
         if(validator.validate(_state.value.content)){
             try {
                 viewModelScope.launch {
-                    repository.insert(Todo(content = state.value.content))
+                    repository.insert(Todo(content = _state.value.content))
                 }
             } catch (e: Throwable) {
                 Log.e("TodoFormViewModel", "And error occurred whiles inserting data $e")
