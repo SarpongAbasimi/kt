@@ -26,6 +26,12 @@ class TodoViewModel(private val repository: Repository): ViewModel(){
         }
     }
 
+    suspend fun handleDelete(todo: Todo) {
+        viewModelScope.launch {
+            repository.delete(todo)
+        }
+    }
+
     suspend private fun getAll(){
         repository.getAll().collect { data: List<Todo> ->
             _todoState.update { state: TodosState -> state.copy(value = data)}
