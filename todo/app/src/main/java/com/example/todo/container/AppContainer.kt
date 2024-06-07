@@ -4,13 +4,13 @@ import android.content.Context
 import com.example.todo.dao.TodoDao
 import com.example.todo.database.AppDatabase
 
-import com.example.todo.repository.TodoRepository
+import com.example.todo.repository.Repository
 import com.example.todo.repository.TodoRepositoryImpl
 import com.example.todo.services.Validator
 import com.example.todo.services.ValidatorService
 
 interface AppContainer {
-    val repository: TodoRepository
+    val repository: Repository
     val validator: Validator
 }
 

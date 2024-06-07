@@ -4,7 +4,7 @@ import com.example.todo.dao.TodoDao
 import com.example.todo.model.Todo
 import kotlinx.coroutines.flow.Flow
 
-interface TodoRepository {
+interface Repository {
     fun find(id: Int): Flow<Todo>
 
     fun getAll(): Flow<List<Todo>>
@@ -16,7 +16,7 @@ interface TodoRepository {
     suspend fun edit(todo: Todo): Unit
 }
 
-class TodoRepositoryImpl(val dao: TodoDao): TodoRepository {
+class TodoRepositoryImpl(val dao: TodoDao): Repository {
 
     override fun find(id: Int): Flow<Todo> {
        return dao.find(id)

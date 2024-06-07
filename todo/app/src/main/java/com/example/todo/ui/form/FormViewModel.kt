@@ -8,7 +8,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.todo.model.FormState
 import com.example.todo.model.Todo
-import com.example.todo.repository.TodoRepository
+import com.example.todo.repository.Repository
 import com.example.todo.services.Validator
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +19,7 @@ import com.example.todo.ApplicationContainer
 import com.example.todo.container.AppContainer
 import kotlinx.coroutines.flow.update
 
-class FormViewModel(private val repository: TodoRepository, private val validator: Validator): ViewModel() {
+class FormViewModel(private val repository: Repository, private val validator: Validator): ViewModel() {
     private val _state: MutableStateFlow<FormState> = MutableStateFlow<FormState>(FormState())
     val state: StateFlow<FormState> = _state.asStateFlow()
 
