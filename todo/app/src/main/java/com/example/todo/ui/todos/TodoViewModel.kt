@@ -22,11 +22,11 @@ class TodoViewModel(private val repository: Repository): ViewModel(){
 
     init {
         viewModelScope .launch {
-            getAllTodos()
+            getAll()
         }
     }
 
-    suspend private fun getAllTodos(){
+    suspend private fun getAll(){
         repository.getAll().collect { data: List<Todo> ->
             _todoState.update { state: TodosState -> state.copy(value = data)}
         }
