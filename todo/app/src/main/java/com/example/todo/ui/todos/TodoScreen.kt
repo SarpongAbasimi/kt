@@ -1,6 +1,7 @@
 package com.example.todo.ui.todos
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -45,14 +46,27 @@ fun TodoScreen(
                     .colorScheme
                     .onBackground
             )
+            .padding(top = dimensionResource(id = R.dimen.padding_small)),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             items(todoState.value, key = {data -> data.id}){ data ->
                 ElevatedCard(
                     elevation = CardDefaults.cardElevation(
                     defaultElevation = 6.dp
                 ),
-                    modifier = Modifier.size(width = 240.dp, height = 100.dp) ) {
-                    Column {
+                    modifier = Modifier
+                        .size(width = 340.dp, height = 100.dp)
+                        .padding(
+                            top = dimensionResource(id = R.dimen.padding_mini),
+                            start = dimensionResource(id = R.dimen.padding_mini)
+                        )
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(dimensionResource(id = R.dimen.padding_mini))
+                    ) {
                         Text(text = data.content)
                     }
                 }
