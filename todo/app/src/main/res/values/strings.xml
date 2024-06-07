@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">todo</string>
     <string name="floating_action_button">Floating action button.</string>
+    <string name="floating_action_button_delete">Delete button.</string>
     <string name="back_arrow">Back arrow</string>
     <string name="what_is_on_your_mind">What is on your mind</string>
 </resources>
