@@ -34,11 +34,13 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.FloatingActionButtonDefaults
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todo.model.Todo
+import kotlinx.coroutines.launch
 
 @Composable
 fun TodoScreen(
@@ -46,6 +48,7 @@ fun TodoScreen(
     viewModel: TodoViewModel = viewModel(factory = TodoViewModel.Factory)
 ){
     val todoState: TodosState by viewModel.state.collectAsState()
+    val coroutineScope = rememberCoroutineScope()
 //    val todoState: TodosState = TodosState(
 //        listOf<Todo>(
 //            Todo(1, "I have to clean my room ", "2024-06006 19:54"),
@@ -104,11 +107,15 @@ fun TodoScreen(
                         }
 
                         FloatingActionButton(
-                            onClick = { /*TODO*/ },
+                            onClick = {
+                                coroutineScope.launch {
+                                 viewModel.handleDelete(data)
+                                }
+                            },
                             modifier = Modifier
-                            .align(Alignment.BottomEnd)
-                            .padding(5.dp)
-                            .size(35.dp),
+                                .align(Alignment.BottomEnd)
+                                .padding(5.dp)
+                                .size(35.dp),
                             containerColor = Color.Unspecified
                         ) {
                             Icon(Icons.Filled.Delete,
