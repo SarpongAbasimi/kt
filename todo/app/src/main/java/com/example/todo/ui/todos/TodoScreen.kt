@@ -31,15 +31,16 @@ import com.example.todo.model.TodosState
 import com.example.todo.ui.theme.TodoTheme
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todo.model.Todo
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
@@ -48,7 +49,7 @@ fun TodoScreen(
     viewModel: TodoViewModel = viewModel(factory = TodoViewModel.Factory)
 ){
     val todoState: TodosState by viewModel.state.collectAsState()
-    val coroutineScope = rememberCoroutineScope()
+    val coroutineScope: CoroutineScope = rememberCoroutineScope()
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier
@@ -61,7 +62,7 @@ fun TodoScreen(
             .padding(top = dimensionResource(id = R.dimen.padding_small)),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(todoState.value, key = {data -> data.id}){ data ->
+            items(todoState.value, key = {data -> data.id}){ data: Todo ->
                 ElevatedCard(
                     elevation = CardDefaults.cardElevation(
                     defaultElevation = 6.dp
@@ -92,22 +93,15 @@ fun TodoScreen(
                             }
                         }
 
-                        FloatingActionButton(
-                            onClick = {
-                                coroutineScope.launch {
-                                 viewModel.handleDelete(data)
-                                }
-                            },
-                            modifier = Modifier
-                                .align(Alignment.BottomEnd)
-                                .padding(5.dp)
-                                .size(35.dp),
-                            containerColor = Color.Unspecified
-                        ) {
-                            Icon(Icons.Filled.Delete,
-                                stringResource(R.string.floating_action_button_delete)
-                            )
-                        }
+                        DeleteAndEdit(
+                            data,
+                            viewModel,
+                            {},
+                            coroutineScope,
+                            deleteModifier = Modifier.align(Alignment.BottomEnd),
+                            editModifier =  Modifier.align(Alignment.BottomEnd),
+                            rowModifier = Modifier.align(Alignment.BottomEnd)
+                        )
                     }
                 }
             }
@@ -125,6 +119,43 @@ fun TodoScreen(
         ){
             Icon(Icons.Filled.Add,
                 stringResource(R.string.floating_action_button),
+            )
+        }
+    }
+}
+
+@Composable
+private fun DeleteAndEdit(
+    data: Todo,
+    viewModel: TodoViewModel,
+    handleOnClickEdit: () -> Unit,
+    coroutineScope: CoroutineScope,
+    deleteModifier: Modifier,
+    editModifier: Modifier,
+    rowModifier: Modifier
+){
+    Row(modifier = rowModifier) {
+        FloatingActionButton(
+            onClick = {
+                coroutineScope.launch {
+                    viewModel.handleDelete(data)
+                }
+            },
+            modifier = deleteModifier.padding(4.dp).size(35.dp),
+            containerColor = Color.Unspecified
+        ) {
+            Icon(Icons.Filled.Delete,
+                stringResource(R.string.floating_action_button_delete)
+            )
+        }
+
+        FloatingActionButton(
+            onClick = { handleOnClickEdit() },
+            modifier = editModifier.padding(4.dp).size(35.dp),
+            containerColor = Color.Unspecified
+        ) {
+            Icon(Icons.Filled.Edit,
+                stringResource(R.string.edit_button_icon)
             )
         }
     }
