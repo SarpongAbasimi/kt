@@ -49,20 +49,6 @@ fun TodoScreen(
 ){
     val todoState: TodosState by viewModel.state.collectAsState()
     val coroutineScope = rememberCoroutineScope()
-//    val todoState: TodosState = TodosState(
-//        listOf<Todo>(
-//            Todo(1, "I have to clean my room ", "2024-06006 19:54"),
-//            Todo(2, "I have to clean my room", "2024-06006 19:54"),
-//            Todo(3, "I have to clean my room", "2024-06006 19:54"),
-//            Todo(4, "I have to clean my room", "2024-06006 19:54"),
-//            Todo(5, "I have to clean my room", "2024-06006 19:54"),
-//            Todo(6, "I have to clean my room", "2024-06006 19:54"),
-//            Todo(7, "I have to clean my room", "2024-06006 19:54"),
-//            Todo(8, "I have to clean my room", "2024-06006 19:54"),
-//            Todo(9, "I have to clean my room", "2024-06006 19:54"),
-//            Todo(10, "I have to clean my room", "2024-06006 19:54")
-//        )
-//    )
 
     Box(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier
