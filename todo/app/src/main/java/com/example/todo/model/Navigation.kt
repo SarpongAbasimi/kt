@@ -15,3 +15,9 @@ sealed interface Navigation {
         return "addTodo"
     }
 }
+
+data object Edit: Navigation{
+    override fun name(): String {
+        return "edit"
+    }
+}
