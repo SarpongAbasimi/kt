@@ -27,7 +27,13 @@ fun EditScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        TextField(value = state.content, onValueChange = {})
+        TextField(
+            value = state.content,
+            onValueChange = {
+                viewModel
+                    .handleOnValueChange(it)
+            }
+        )
     }
 
 }
