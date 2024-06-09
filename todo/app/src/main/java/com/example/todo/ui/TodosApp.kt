@@ -7,10 +7,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.todo.model.AddTodo
-import com.example.todo.model.Navigation
+import com.example.todo.model.Edit
 import com.example.todo.model.Todos
 import com.example.todo.navigation.NavRoutes
 import com.example.todo.navigation.NavigationService
+import com.example.todo.ui.edit.EditScreen
 import com.example.todo.ui.form.FormScreen
 import com.example.todo.ui.theme.TodoTheme
 import com.example.todo.ui.todos.TodoScreen
@@ -18,13 +19,21 @@ import com.example.todo.ui.todos.TodoScreen
 
 @Composable
 fun TodosApp(navRoutes: NavRoutes, navController: NavHostController){
+    val edit: String = navRoutes.build(Edit)
+    val todos: String = navRoutes.build(Todos)
+    val add: String = navRoutes.build(AddTodo)
+
     NavHost(navController = navController, startDestination = navRoutes.build(Todos)) {
-        composable(navRoutes.build(Todos)){
-            TodoScreen({navController.navigate(navRoutes.build(AddTodo))})
+        composable(todos){
+            TodoScreen({navController.navigate(add)}, {navController.navigate(edit)})
         }
 
-        composable(navRoutes.build(AddTodo)){
+        composable(add){
             FormScreen({navController.popBackStack()})
+        }
+
+        composable(edit){
+            EditScreen()
         }
     }
 }
