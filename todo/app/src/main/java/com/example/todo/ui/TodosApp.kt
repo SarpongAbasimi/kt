@@ -38,8 +38,7 @@ fun TodosApp(navRoutes: NavRoutes, navController: NavHostController){
 
         composable(route = "$edit/{id}",
             arguments = listOf(navArgument("id", builder = { NavType.IntType }))
-        ){ backStackEntry ->
-            Log.d("MyTag", "${backStackEntry.arguments?.getString("id")}")
+        ){
             EditScreen()
         }
     }
