@@ -28,7 +28,10 @@ fun TodosApp(navRoutes: NavRoutes, navController: NavHostController){
 
     NavHost(navController = navController, startDestination = navRoutes.build(Todos)) {
         composable(todos){ backStackEntry: NavBackStackEntry ->
-            TodoScreen({navController.navigate(add)}, {navController.navigate("$edit/$it")})
+            TodoScreen({
+                navController.navigate(add)},
+                {navController.navigate("$edit/$it")}
+            )
         }
 
         composable(add){
