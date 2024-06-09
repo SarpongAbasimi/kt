@@ -18,6 +18,6 @@ sealed interface Navigation {
 
 data object Edit: Navigation{
     override fun name(): String {
-        return "edit/{id}"
+        return "edit"
     }
 }

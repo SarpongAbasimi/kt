@@ -1,5 +1,6 @@
 package com.example.todo.ui
 
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavBackStackEntry
@@ -28,16 +29,17 @@ fun TodosApp(navRoutes: NavRoutes, navController: NavHostController){
 
     NavHost(navController = navController, startDestination = navRoutes.build(Todos)) {
         composable(todos){ backStackEntry: NavBackStackEntry ->
-            TodoScreen({navController.navigate(add)}, {navController.navigate(edit)})
+            TodoScreen({navController.navigate(add)}, {navController.navigate("$edit/$it")})
         }
 
         composable(add){
             FormScreen({navController.popBackStack()})
         }
 
-        composable(route = edit,
+        composable(route = "$edit/{id}",
             arguments = listOf(navArgument("id", builder = { NavType.IntType }))
-        ){
+        ){ backStackEntry ->
+            Log.d("MyTag", "${backStackEntry.arguments?.getString("id")}")
             EditScreen()
         }
     }
