@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.todo.model.AddTodo
+import com.example.todo.model.Add
 import com.example.todo.model.Edit
 import com.example.todo.model.Todos
 import com.example.todo.navigation.NavRoutes
@@ -21,7 +21,7 @@ import com.example.todo.ui.todos.TodoScreen
 fun TodosApp(navRoutes: NavRoutes, navController: NavHostController){
     val edit: String = navRoutes.build(Edit)
     val todos: String = navRoutes.build(Todos)
-    val add: String = navRoutes.build(AddTodo)
+    val add: String = navRoutes.build(Add)
 
     NavHost(navController = navController, startDestination = navRoutes.build(Todos)) {
         composable(todos){

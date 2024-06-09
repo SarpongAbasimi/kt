@@ -10,9 +10,9 @@ sealed interface Navigation {
     }
 }
 
- data object AddTodo: Navigation {
+ data object Add: Navigation {
     override fun name(): String {
-        return "addTodo"
+        return "add"
     }
 }
 
