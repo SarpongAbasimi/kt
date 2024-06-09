@@ -2,10 +2,13 @@ package com.example.todo.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.todo.model.Add
 import com.example.todo.model.Edit
 import com.example.todo.model.Todos
@@ -24,7 +27,7 @@ fun TodosApp(navRoutes: NavRoutes, navController: NavHostController){
     val add: String = navRoutes.build(Add)
 
     NavHost(navController = navController, startDestination = navRoutes.build(Todos)) {
-        composable(todos){
+        composable(todos){ backStackEntry: NavBackStackEntry ->
             TodoScreen({navController.navigate(add)}, {navController.navigate(edit)})
         }
 
@@ -32,7 +35,9 @@ fun TodosApp(navRoutes: NavRoutes, navController: NavHostController){
             FormScreen({navController.popBackStack()})
         }
 
-        composable(edit){
+        composable(route = edit,
+            arguments = listOf(navArgument("id", builder = { NavType.IntType }))
+        ){
             EditScreen()
         }
     }

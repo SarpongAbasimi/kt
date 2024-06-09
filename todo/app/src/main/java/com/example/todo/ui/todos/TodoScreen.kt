@@ -46,7 +46,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun TodoScreen(
     handleAddNavigation:()-> Unit,
-    handleEditNavigation:() -> Unit,
+    handleEditNavigation:(Int) -> Unit,
     viewModel: TodoViewModel = viewModel(factory = TodoViewModel.Factory)
 ){
     val todoState: TodosState by viewModel.state.collectAsState()
@@ -129,7 +129,7 @@ fun TodoScreen(
 private fun DeleteAndEdit(
     data: Todo,
     viewModel: TodoViewModel,
-    handleOnClickEdit: () -> Unit,
+    handleOnClickEdit: (Int) -> Unit,
     coroutineScope: CoroutineScope,
     deleteModifier: Modifier,
     editModifier: Modifier,
@@ -151,7 +151,7 @@ private fun DeleteAndEdit(
         }
 
         FloatingActionButton(
-            onClick =  handleOnClickEdit ,
+            onClick =  { handleOnClickEdit(data.id) } ,
             modifier = editModifier.padding(4.dp).size(35.dp),
             containerColor = Color.Unspecified
         ) {
