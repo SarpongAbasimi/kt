@@ -34,6 +34,10 @@ class EditViewModel(
         }
     }
 
+    suspend fun handleOnSave(todo: Todo) {
+        repository.edit(todo)
+    }
+
     fun handleOnValueChange(content: String){
         _editTodoState.update { todo ->
             todo.copy(content = content)

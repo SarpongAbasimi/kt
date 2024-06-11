@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -20,13 +21,15 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.todo.R
 import com.example.todo.model.Todo
 import com.example.todo.ui.theme.TodoTheme
+import kotlinx.coroutines.launch
 
 
 @Composable
 fun EditScreen(
-    onClickBackHandler: () -> Unit,
+    navigateBack: () -> Unit,
     viewModel: EditViewModel = viewModel(factory = EditViewModel.Factory)
 ){
+    val coroutineScope = rememberCoroutineScope()
     val state: Todo by viewModel.state.collectAsState()
 
     Column(
@@ -50,7 +53,12 @@ fun EditScreen(
         )
 
         Column {
-            Button(onClick = { /*TODO*/ }, modifier = Modifier
+            Button(onClick = {
+                coroutineScope.launch {
+                    viewModel.handleOnSave(state)
+                    navigateBack()
+                }
+            }, modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     start = dimensionResource(id = R.dimen.padding_small),
@@ -60,11 +68,12 @@ fun EditScreen(
             ) {
                 Text(text = "Save")
             }
-            Button(onClick = onClickBackHandler, modifier = Modifier
+            Button(onClick = navigateBack, modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     start = dimensionResource(id = R.dimen.padding_small),
-                    end = dimensionResource(id = R.dimen.padding_small))
+                    end = dimensionResource(id = R.dimen.padding_small)
+                )
             ) {
                 Text(text = "Back")
             }
