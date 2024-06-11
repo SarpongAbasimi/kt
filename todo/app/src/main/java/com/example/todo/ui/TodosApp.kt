@@ -41,7 +41,7 @@ fun TodosApp(navRoutes: NavRoutes, navController: NavHostController){
         composable(route = "$edit/{id}",
             arguments = listOf(navArgument("id", builder = { NavType.IntType }))
         ){
-            EditScreen()
+            EditScreen({ navController.popBackStack() })
         }
     }
 }

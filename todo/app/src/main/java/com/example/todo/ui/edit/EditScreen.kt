@@ -24,6 +24,7 @@ import com.example.todo.ui.theme.TodoTheme
 
 @Composable
 fun EditScreen(
+    onClickBackHandler: () -> Unit,
     viewModel: EditViewModel = viewModel(factory = EditViewModel.Factory)
 ){
     val state: Todo by viewModel.state.collectAsState()
@@ -59,7 +60,7 @@ fun EditScreen(
             ) {
                 Text(text = "Save")
             }
-            Button(onClick = { /*TODO*/ }, modifier = Modifier
+            Button(onClick = onClickBackHandler, modifier = Modifier
                 .fillMaxWidth()
                 .padding(
                     start = dimensionResource(id = R.dimen.padding_small),
@@ -76,6 +77,6 @@ fun EditScreen(
 @Composable
 fun EditScreenPreview(){
     TodoTheme {
-        EditScreen()
+        EditScreen({})
     }
 }
