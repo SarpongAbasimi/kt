@@ -13,9 +13,7 @@ interface RetrofitClientBuilder {
 object RetrofitClient : RetrofitClientBuilder {
     override fun build(baseUrl: BaseUrl, apiKey: ApiKey): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("""
-                ${baseUrl.url}?api_key=${apiKey.value}&append_to_response=&append_to_response=videos,images
-                """.trimIndent())
+            .baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(ScalarsConverterFactory.create())
             .build()
     }

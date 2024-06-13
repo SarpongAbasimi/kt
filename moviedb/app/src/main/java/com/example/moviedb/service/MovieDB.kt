@@ -6,8 +6,8 @@ import com.example.moviedb.network.client.retrofit.RetrofitClient
 import retrofit2.http.GET
 
 interface MovieDB {
-    @GET()
-    suspend fun getMovies(): String
+    @GET("movie/popular?language=en-US")
+    suspend fun getPopularMovies(): String
 
     companion object {
         fun api(baseUrl: BaseUrl, apiKey: ApiKey): MovieDB {
