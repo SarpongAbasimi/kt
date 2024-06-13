@@ -1,8 +1,10 @@
 package com.example.moviedb.model
 
 import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
+@Serializable
 data class PopularMoviesResult(
     val id: Int,
     @SerialName(value = "original_language")
@@ -21,4 +23,5 @@ data class PopularMoviesResult(
 )
 
 
+@Serializable
 data class PopularMovies(val page: Int, val results: List<PopularMoviesResult>)
