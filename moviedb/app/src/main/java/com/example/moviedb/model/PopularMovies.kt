@@ -19,7 +19,9 @@ data class PopularMoviesResult(
     @SerialName(value = "vote_average")
     val voteAverage: Double,
     @SerialName(value = "vote_count")
-    val voteCount: Int
+    val voteCount: Int,
+    @SerialName(value ="backdrop_path")
+    val backdropPath: String
 )
 
 

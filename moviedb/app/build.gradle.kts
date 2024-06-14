@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.retrofit)
     implementation(libs.androidx.scalar.converter)
     implementation(libs.androidx.lifecycle.compose)
+    implementation(libs.androidx.coil)
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
