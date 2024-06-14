@@ -1,22 +1,47 @@
 package com.example.moviedb.ui.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.moviedb.ApplicationContainer
-import com.example.moviedb.service.FileReader
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import com.example.moviedb.dummy.Movies
+import com.example.moviedb.model.Error
+import com.example.moviedb.model.Loading
+import com.example.moviedb.model.ScreenState
+import com.example.moviedb.model.Success
+import com.example.moviedb.service.Transformer
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class HomeViewModel(val fileReader: FileReader): ViewModel() {
 
-    fun read(file: String): String {
-        return runBlocking {
-            val result: Deferred<String> = async { fileReader.readFrom(file)}
-            result.await()
+class HomeViewModel(val transformer: Transformer): ViewModel() {
+    private val _state = MutableStateFlow<ScreenState>(Loading)
+    val state: StateFlow<ScreenState> = _state.asStateFlow()
+
+    init {
+        read()
+    }
+
+    private fun read(){
+        viewModelScope.launch {
+            try {
+                _state.update {
+                    val result = Movies.content
+                    val encode = transformer.encode(result)
+                    val decode = transformer.decode(encode)
+                    Success(decode)
+                }
+            } catch (error: Throwable){
+                Log.d("MyError", "$error")
+                _state.update { Error}
+            }
         }
     }
 
@@ -25,23 +50,8 @@ class HomeViewModel(val fileReader: FileReader): ViewModel() {
             initializer {
                  val container = (this[APPLICATION_KEY] as ApplicationContainer).container
 
-                HomeViewModel(container.fileReader)
+                HomeViewModel(container.transformer)
             }
         }
     }
 }
-
-
-
-//fun main(){
-//    val fileReader = FileReaderService()
-//    val homeViewModel = HomeViewModel(fileReader)
-//    val path = "/Users/sarpongabasimi/Desktop/Projects/kotlin/moviedb/app/src/main/java/com/example/moviedb/dummy/movie.json"
-//    val res = homeViewModel.read(path)
-//     val json = Json { ignoreUnknownKeys = true }
-//
-//    val convert = Json.parseToJsonElement(res)
-//    val decode = json.decodeFromJsonElement<PopularMovies>(convert)
-//
-//    println(decode)
-//}

@@ -62,7 +62,7 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.retrofit)
     implementation(libs.androidx.scalar.converter)
-    // Retrofit with Kotlin serialization Converter
+    implementation(libs.androidx.lifecycle.compose)
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
