@@ -79,8 +79,7 @@ fun HorizontalPagerSample(
     })
 
     Column(
-        modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier
     ) {
         Box {
             HorizontalPager(state = pagerState, Modifier) { page ->
