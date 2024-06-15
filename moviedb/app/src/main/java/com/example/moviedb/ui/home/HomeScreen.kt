@@ -5,10 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -57,12 +57,16 @@ fun SuccessHandler(popularMovies: PopularMovies, modifier: Modifier = Modifier) 
         .background(color = MaterialTheme.colorScheme.scrim)
     ) {
         HorizontalPagerSample(popularMovies, Modifier.weight(1f))
-        PopularMovies(popularMovies, Modifier.weight(2f))
+        PopularMovies(popularMovies, Modifier.weight(1f))
+        PopularMovies(popularMovies, Modifier.weight(1f))
     }
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HorizontalPagerSample(popularMovies: PopularMovies, modifier: Modifier = Modifier) {
+fun HorizontalPagerSample(
+    popularMovies: PopularMovies,
+    modifier: Modifier = Modifier
+) {
     val pagerState: PagerState = rememberPagerState(pageCount = {
         popularMovies.results.size
     })
@@ -81,7 +85,10 @@ fun HorizontalPagerSample(popularMovies: PopularMovies, modifier: Modifier = Mod
 }
 
 @Composable
-fun PopularMovies(popularMovies: PopularMovies, modifier: Modifier = Modifier){
+fun PopularMovies(
+    popularMovies: PopularMovies,
+    modifier: Modifier = Modifier
+){
    Column(modifier.fillMaxSize()) {
        Text(
            text = "Most Popular",
@@ -101,17 +108,18 @@ fun PopularMovies(popularMovies: PopularMovies, modifier: Modifier = Modifier){
            popularMovies.results.forEach {
                Card(
                    Modifier
-                       .size(100.dp)
-                       .padding(start = 1.dp, end = 1.dp),
+                       .padding(start = 1.dp, end = 5.dp)
+                       .aspectRatio(0.5f),
                    colors = CardDefaults.elevatedCardColors(
-                       containerColor = Color.Unspecified
+                       containerColor = Color.Cyan
                    ),
                    shape = CardDefaults.outlinedShape
                ) {
                    AsyncImage(
                        model = Util.ImageRequest(it.posterPath),
                        contentDescription = null,
-                       modifier.background(Color.Red)
+                       contentScale = ContentScale.Crop,
+                       modifier = Modifier.fillMaxSize()
                    )
                }
            }
