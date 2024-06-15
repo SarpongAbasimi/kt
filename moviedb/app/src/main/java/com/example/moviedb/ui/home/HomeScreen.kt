@@ -51,14 +51,14 @@ fun HomeScreen(homeViewModel: HomeViewModel= viewModel(factory = HomeViewModel.F
 }
 
 @Composable
-fun SuccessHandler(popularMovies: PopularMovies, modifier: Modifier = Modifier) {
+fun SuccessHandler(movies: PopularMovies, modifier: Modifier = Modifier) {
     Column(modifier = modifier
         .fillMaxSize()
         .background(color = MaterialTheme.colorScheme.scrim)
     ) {
-        HorizontalPagerSample(popularMovies, Modifier.weight(1f))
-        PopularMovies(popularMovies, Modifier.weight(1f))
-        PopularMovies(popularMovies, Modifier.weight(1f))
+        HorizontalPagerSample(movies, Modifier.weight(1f))
+        RowMoviesDisplay(movies, "Discover", Modifier.weight(1f))
+        RowMoviesDisplay(movies, "Movies", Modifier.weight(1f))
     }
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -85,13 +85,14 @@ fun HorizontalPagerSample(
 }
 
 @Composable
-fun PopularMovies(
+fun RowMoviesDisplay(
     popularMovies: PopularMovies,
-    modifier: Modifier = Modifier
+    title: String,
+    modifier: Modifier = Modifier,
 ){
    Column(modifier.fillMaxSize()) {
        Text(
-           text = "Most Popular",
+           text = title,
            fontWeight = FontWeight.Bold,
            fontFamily = FontFamily.SansSerif,
            fontSize = 35.sp ,
@@ -111,7 +112,7 @@ fun PopularMovies(
                        .padding(start = 1.dp, end = 5.dp)
                        .aspectRatio(0.5f),
                    colors = CardDefaults.elevatedCardColors(
-                       containerColor = Color.Cyan
+                       containerColor = Color.Unspecified
                    ),
                    shape = CardDefaults.outlinedShape
                ) {
