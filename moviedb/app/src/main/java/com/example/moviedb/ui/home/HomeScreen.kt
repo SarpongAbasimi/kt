@@ -58,7 +58,7 @@ fun SuccessHandler(movies: PopularMovies, modifier: Modifier = Modifier) {
     ) {
         HorizontalPagerSample(movies, Modifier.weight(1f))
         RowMoviesDisplay(movies, "Discover", Modifier.weight(1f))
-        RowMoviesDisplay(movies, "Movies", Modifier.weight(1f))
+        RowMoviesDisplay(movies, "Popular Movies", Modifier.weight(1f))
     }
 }
 @OptIn(ExperimentalFoundationApi::class)
