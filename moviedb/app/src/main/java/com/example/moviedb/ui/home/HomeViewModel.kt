@@ -10,6 +10,7 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.moviedb.ApplicationContainer
 import com.example.moviedb.dummy.Movies
 import com.example.moviedb.model.Error
+import com.example.moviedb.model.HomeScreenState
 import com.example.moviedb.model.Loading
 import com.example.moviedb.model.ScreenState
 import com.example.moviedb.model.Success
@@ -35,8 +36,13 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
                 _state.update {
                     val result = Movies.content
                     val encode = transformer.encode(result)
-                    val decode = transformer.decode(encode)
-                    Success(decode)
+                    val decodeResult = transformer.decode(encode)
+                    Success(
+                        HomeScreenState(
+                            decodeResult,
+                            decodeResult.results.size
+                        )
+                    )
                 }
             } catch (error: Throwable){
                 Log.d("MyError", "$error")

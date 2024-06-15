@@ -136,7 +136,7 @@ fun StateHandler(state: ScreenState){
             painter = painterResource(id = R.drawable.progess),
             contentDescription = null
         )
-        is Success -> SuccessHandler(state.result)
+        is Success -> SuccessHandler(state.homeScreenState.popularMovies)
         is Error -> Icon(
             painter = painterResource(id = R.drawable.warning),
             contentDescription = null
