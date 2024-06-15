@@ -75,8 +75,9 @@ fun HorizontalPagerSample(
     modifier: Modifier = Modifier
 ) {
     val pagerState: PagerState = rememberPagerState(pageCount = {
-        popularMovies.results.size
+        popularMoviesSize
     })
+
     Column(
         modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -89,17 +90,19 @@ fun HorizontalPagerSample(
                     contentScale = ContentScale.Crop
                 )
             }
+
             Row(Modifier
                 .fillMaxWidth()
                 .align(Alignment.BottomStart),
                 horizontalArrangement = Arrangement.Center
             ) {
                 repeat(popularMoviesSize){
+                    val color = if (pagerState.currentPage == it) Color.DarkGray else Color.LightGray
                     Box(
                         modifier = Modifier
                             .padding(2.dp)
                             .clip(CircleShape)
-                            .background(Color.Red)
+                            .background(color)
                             .size(10.dp)
                     )
                 }
