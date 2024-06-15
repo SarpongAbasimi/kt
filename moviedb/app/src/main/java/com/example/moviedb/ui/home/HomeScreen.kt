@@ -3,16 +3,20 @@ package com.example.moviedb.ui.home
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -23,6 +27,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -35,6 +40,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.moviedb.R
 import com.example.moviedb.model.Error
+import com.example.moviedb.model.HomeScreenState
 import com.example.moviedb.model.Loading
 import com.example.moviedb.model.PopularMovies
 import com.example.moviedb.model.ScreenState
@@ -51,20 +57,21 @@ fun HomeScreen(homeViewModel: HomeViewModel= viewModel(factory = HomeViewModel.F
 }
 
 @Composable
-fun SuccessHandler(movies: PopularMovies, modifier: Modifier = Modifier) {
+fun SuccessHandler(homeScreenState: HomeScreenState, modifier: Modifier = Modifier) {
     Column(modifier = modifier
         .fillMaxSize()
         .background(color = MaterialTheme.colorScheme.scrim)
     ) {
-        HorizontalPagerSample(movies, Modifier.weight(1f))
-        RowMoviesDisplay(movies, "Discover", Modifier.weight(1f))
-        RowMoviesDisplay(movies, "Popular Movies", Modifier.weight(1f))
+        HorizontalPagerSample(homeScreenState.popularMovies, homeScreenState.popularMoviesSize ,Modifier.weight(1f))
+        RowMoviesDisplay(homeScreenState.popularMovies, "Discover", Modifier.weight(1f))
+        RowMoviesDisplay(homeScreenState.popularMovies, "Popular Movies", Modifier.weight(1f))
     }
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HorizontalPagerSample(
     popularMovies: PopularMovies,
+    popularMoviesSize: Int,
     modifier: Modifier = Modifier
 ) {
     val pagerState: PagerState = rememberPagerState(pageCount = {
@@ -74,12 +81,29 @@ fun HorizontalPagerSample(
         modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        HorizontalPager(state = pagerState, Modifier) { page ->
-            AsyncImage(
-                model = Util.ImageRequest("${popularMovies.results[page].backdropPath}"),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
-            )
+        Box {
+            HorizontalPager(state = pagerState, Modifier) { page ->
+                AsyncImage(
+                    model = Util.ImageRequest("${popularMovies.results[page].backdropPath}"),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
+            }
+            Row(Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomStart),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(popularMoviesSize){
+                    Box(
+                        modifier = Modifier
+                            .padding(2.dp)
+                            .clip(CircleShape)
+                            .background(Color.Red)
+                            .size(10.dp)
+                    )
+                }
+            }
         }
     }
 }
@@ -136,7 +160,7 @@ fun StateHandler(state: ScreenState){
             painter = painterResource(id = R.drawable.progess),
             contentDescription = null
         )
-        is Success -> SuccessHandler(state.homeScreenState.popularMovies)
+        is Success -> SuccessHandler(state.homeScreenState)
         is Error -> Icon(
             painter = painterResource(id = R.drawable.warning),
             contentDescription = null
