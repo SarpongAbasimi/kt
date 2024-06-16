@@ -65,6 +65,7 @@ fun SuccessHandler(homeScreenState: HomeScreenState, modifier: Modifier = Modifi
         HorizontalPagerSample(homeScreenState.popularMovies, homeScreenState.popularMoviesSize ,Modifier.weight(1f))
         RowMoviesDisplay(homeScreenState.popularMovies, "Discover", Modifier.weight(1f))
         RowMoviesDisplay(homeScreenState.popularMovies, "Popular Movies", Modifier.weight(1f))
+        RowMoviesDisplay(homeScreenState.popularMovies, "Tv Shows", Modifier.weight(1f))
     }
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -82,7 +83,7 @@ fun HorizontalPagerSample(
         modifier
     ) {
         Box {
-            HorizontalPager(state = pagerState, Modifier) { page ->
+            HorizontalPager(state = pagerState) { page ->
                 AsyncImage(
                     model = Util.ImageRequest("${popularMovies.results[page].backdropPath}"),
                     contentDescription = null,
@@ -121,8 +122,8 @@ fun RowMoviesDisplay(
            text = title,
            fontWeight = FontWeight.Bold,
            fontFamily = FontFamily.SansSerif,
-           fontSize = 35.sp ,
-           modifier = Modifier.padding(bottom = 5.dp),
+           fontSize = 25.sp ,
+           modifier = Modifier.padding(bottom = 5.dp, top = 5.dp),
            color = PurpleGrey80
        )
 
