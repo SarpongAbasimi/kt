@@ -2,6 +2,7 @@ package com.example.moviedb.ui.home
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -50,25 +51,55 @@ import com.example.moviedb.model.Success
 import com.example.moviedb.ui.theme.MoviedbTheme
 import com.example.moviedb.ui.theme.PurpleGrey80
 import com.example.moviedb.util.Util
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 
 @Composable
 fun HomeScreen(homeViewModel: HomeViewModel= viewModel(factory = HomeViewModel.Factory)){
     val state: ScreenState by  homeViewModel.state.collectAsState()
-    StateHandler(state)
-}
+    val coroutine: CoroutineScope = rememberCoroutineScope()
 
+    StateHandler(state, coroutine)
+}
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun SuccessHandler(homeScreenState: HomeScreenState, modifier: Modifier = Modifier) {
+fun SuccessHandler(
+    homeScreenState: HomeScreenState,
+    coroutine: CoroutineScope,
+    modifier: Modifier = Modifier
+) {
+
+    val pagerState: PagerState = rememberPagerState(pageCount = {
+       homeScreenState.popularMoviesSize
+    })
+
     Column(modifier = modifier
         .fillMaxSize()
         .background(color = MaterialTheme.colorScheme.scrim)
     ) {
-        HorizontalPagerSample(homeScreenState.popularMovies, homeScreenState.popularMoviesSize ,Modifier.weight(1f))
-        RowMoviesDisplay(homeScreenState.popularMovies, "Discover", Modifier.weight(1f))
-        RowMoviesDisplay(homeScreenState.popularMovies, "Popular Movies", Modifier.weight(1f))
-        RowMoviesDisplay(homeScreenState.popularMovies, "Tv Shows", Modifier.weight(1f))
+        HorizontalPagerSample(
+            homeScreenState.popularMovies,
+            homeScreenState.popularMoviesSize,
+            pagerState,
+            Modifier.weight(1f)
+        )
+
+        RowMoviesDisplay(
+            homeScreenState.popularMovies,
+            "Discover",
+            coroutine,
+            pagerState,
+            Modifier.weight(1f)
+        )
+
+        RowMoviesDisplay(
+            homeScreenState.popularMovies,
+            "Popular Movies",
+            coroutine,
+            pagerState,
+            Modifier.weight(1f)
+        )
     }
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -76,12 +107,9 @@ fun SuccessHandler(homeScreenState: HomeScreenState, modifier: Modifier = Modifi
 fun HorizontalPagerSample(
     popularMovies: PopularMovies,
     popularMoviesSize: Int,
+    pagerState: PagerState,
     modifier: Modifier = Modifier
 ) {
-    val pagerState: PagerState = rememberPagerState(pageCount = {
-        popularMoviesSize
-    })
-
     Column(
         modifier.padding(bottom = 5.dp)
     ) {
@@ -115,10 +143,13 @@ fun HorizontalPagerSample(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RowMoviesDisplay(
     popularMovies: PopularMovies,
     title: String,
+    coroutine: CoroutineScope,
+    pagerState: PagerState,
     modifier: Modifier = Modifier,
 ){
    Column(modifier.fillMaxSize()) {
@@ -137,18 +168,25 @@ fun RowMoviesDisplay(
                .padding(top = 5.dp)
                .horizontalScroll(rememberScrollState())
        ) {
-           popularMovies.results.forEach {
+
+           popularMovies.results.forEachIndexed { index, movieResult ->
                Card(
                    Modifier
                        .padding(start = 1.dp, end = 5.dp)
-                       .aspectRatio(0.5f),
+                       .aspectRatio(0.5f)
+                       .clickable {
+                          coroutine.launch {
+                              pagerState
+                                  .animateScrollToPage(index)
+                          }
+                       },
                    colors = CardDefaults.elevatedCardColors(
                        containerColor = Color.Unspecified
                    ),
                    shape = CardDefaults.outlinedShape
                ) {
                    AsyncImage(
-                       model = Util.ImageRequest(it.posterPath),
+                       model = Util.ImageRequest(movieResult.posterPath),
                        contentDescription = null,
                        contentScale = ContentScale.Crop,
                        modifier = Modifier.fillMaxSize()
@@ -161,13 +199,13 @@ fun RowMoviesDisplay(
 
 
 @Composable
-fun StateHandler(state: ScreenState){
+fun StateHandler(state: ScreenState, coroutine: CoroutineScope){
     when(state){
         is Loading -> Icon(
             painter = painterResource(id = R.drawable.progess),
             contentDescription = null
         )
-        is Success -> SuccessHandler(state.homeScreenState)
+        is Success -> SuccessHandler(state.homeScreenState, coroutine)
         is Error -> Icon(
             painter = painterResource(id = R.drawable.warning),
             contentDescription = null
