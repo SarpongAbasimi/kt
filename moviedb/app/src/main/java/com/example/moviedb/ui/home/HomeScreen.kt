@@ -23,8 +23,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,6 +50,7 @@ import com.example.moviedb.model.Success
 import com.example.moviedb.ui.theme.MoviedbTheme
 import com.example.moviedb.ui.theme.PurpleGrey80
 import com.example.moviedb.util.Util
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -91,9 +94,10 @@ fun HorizontalPagerSample(
                 )
             }
 
-            Row(Modifier
-                .fillMaxWidth()
-                .align(Alignment.BottomStart),
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.BottomStart),
                 horizontalArrangement = Arrangement.Center
             ) {
                 repeat(popularMoviesSize){
