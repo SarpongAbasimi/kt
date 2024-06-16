@@ -34,7 +34,7 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
         viewModelScope.launch {
             try {
                 _state.update {
-                    val result = Movies.content
+                    val result = Movies.popular
                     val encode = transformer.encode(result)
                     val decodeResult = transformer.decode(encode)
                     Success(
