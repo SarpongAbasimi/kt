@@ -12,6 +12,7 @@ import com.example.moviedb.dummy.Movies
 import com.example.moviedb.model.Error
 import com.example.moviedb.model.HomeScreenState
 import com.example.moviedb.model.Loading
+import com.example.moviedb.model.PopularMovies
 import com.example.moviedb.model.ScreenState
 import com.example.moviedb.model.Success
 import com.example.moviedb.service.Transformer
@@ -30,17 +31,23 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
         read()
     }
 
+
     private fun read(){
         viewModelScope.launch {
             try {
                 _state.update {
-                    val result = Movies.popular
-                    val encode = transformer.encode(result)
-                    val decodeResult = transformer.decode(encode)
+                    val popularMovies = getData(Movies.popular)
+                    val nowPlaying = getData(Movies.nowPlaying)
+                    val topRated = getData(Movies.topRated)
+                    val upComing = getData(Movies.upComing)
+
                     Success(
                         HomeScreenState(
-                            decodeResult,
-                            decodeResult.results.size
+                            popularMovies,
+                            topRated,
+                            nowPlaying,
+                            upComing,
+                            popularMovies.results.size
                         )
                     )
                 }
@@ -48,8 +55,16 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
                 Log.d("MyError", "$error")
                 _state.update { Error}
             }
+
         }
     }
+
+
+    private fun getData(input: String): PopularMovies {
+        val encode = transformer.encode(input)
+        return  transformer.decode(encode)
+    }
+
 
     companion object {
         val Factory: ViewModelProvider.Factory = viewModelFactory {

@@ -79,14 +79,30 @@ fun SuccessHandler(
         .background(color = MaterialTheme.colorScheme.scrim)
     ) {
         HorizontalPagerSample(
-            homeScreenState.popularMovies,
+            homeScreenState.topRatedMovies,
             homeScreenState.popularMoviesSize,
+            pagerState,
+            Modifier.weight(2f)
+        )
+
+        RowMoviesDisplay(
+            homeScreenState.popularMovies,
+            "Most Popular",
+            coroutine,
             pagerState,
             Modifier.weight(1f)
         )
 
         RowMoviesDisplay(
-            homeScreenState.popularMovies,
+            homeScreenState.topRatedMovies,
+            "Top Rated",
+            coroutine,
+            pagerState,
+            Modifier.weight(1f)
+        )
+
+        RowMoviesDisplay(
+            homeScreenState.upComing,
             "Discover",
             coroutine,
             pagerState,
@@ -94,8 +110,8 @@ fun SuccessHandler(
         )
 
         RowMoviesDisplay(
-            homeScreenState.popularMovies,
-            "Popular Movies",
+            homeScreenState.nowPlaying,
+            "Now Playing",
             coroutine,
             pagerState,
             Modifier.weight(1f)
@@ -157,7 +173,7 @@ fun RowMoviesDisplay(
            text = title,
            fontWeight = FontWeight.Bold,
            fontFamily = FontFamily.SansSerif,
-           fontSize = 25.sp ,
+           fontSize = 20.sp ,
            modifier = Modifier,
            color = PurpleGrey80
        )
