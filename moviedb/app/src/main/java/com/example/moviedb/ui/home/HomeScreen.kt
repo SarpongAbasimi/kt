@@ -80,7 +80,7 @@ fun HorizontalPagerSample(
     })
 
     Column(
-        modifier
+        modifier.padding(bottom = 5.dp)
     ) {
         Box {
             HorizontalPager(state = pagerState) { page ->
@@ -123,7 +123,7 @@ fun RowMoviesDisplay(
            fontWeight = FontWeight.Bold,
            fontFamily = FontFamily.SansSerif,
            fontSize = 25.sp ,
-           modifier = Modifier.padding(bottom = 5.dp, top = 5.dp),
+           modifier = Modifier,
            color = PurpleGrey80
        )
 
