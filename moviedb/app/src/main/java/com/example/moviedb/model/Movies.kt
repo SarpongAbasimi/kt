@@ -24,6 +24,16 @@ data class PopularMoviesResult(
     val backdropPath: String
 )
 
+@Serializable
+data class Dates(
+    val maximum: String,
+    val minimum: String
+)
+
 
 @Serializable
-data class PopularMovies(val page: Int, val results: List<PopularMoviesResult>)
+data class PopularMovies(
+    val page: Int,
+    val results: List<PopularMoviesResult>,
+    val dates: Dates
+)

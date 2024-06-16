@@ -1,7 +1,7 @@
 package com.example.moviedb.dummy
 
 object Movies {
-    val content: String = """
+    val popular: String = """
     {
       "page": 1,
       "results": [
