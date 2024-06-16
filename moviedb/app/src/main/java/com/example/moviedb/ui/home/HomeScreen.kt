@@ -79,7 +79,7 @@ fun SuccessHandler(
         .background(color = MaterialTheme.colorScheme.scrim)
     ) {
         HorizontalPagerSample(
-            homeScreenState.topRatedMovies,
+            homeScreenState.pagerMovies,
             homeScreenState.popularMoviesSize,
             pagerState,
             Modifier.weight(2f)

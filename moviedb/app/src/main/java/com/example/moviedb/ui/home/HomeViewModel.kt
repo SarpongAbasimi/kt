@@ -40,6 +40,7 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
                     val nowPlaying = getData(Movies.nowPlaying)
                     val topRated = getData(Movies.topRated)
                     val upComing = getData(Movies.upComing)
+                    val moviesList =  listOf(popularMovies, nowPlaying, topRated, upComing)
 
                     Success(
                         HomeScreenState(
@@ -47,6 +48,7 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
                             topRated,
                             nowPlaying,
                             upComing,
+                            handleHorizontalPager(moviesList),
                             popularMovies.results.size
                         )
                     )
@@ -59,6 +61,9 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
         }
     }
 
+    private fun handleHorizontalPager(input: List<PopularMovies>): PopularMovies{
+        return input.shuffled().random()
+    }
 
     private fun getData(input: String): PopularMovies {
         val encode = transformer.encode(input)

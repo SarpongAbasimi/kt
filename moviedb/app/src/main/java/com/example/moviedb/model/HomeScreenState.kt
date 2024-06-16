@@ -5,5 +5,6 @@ data class HomeScreenState(
     val topRatedMovies: PopularMovies,
     val nowPlaying: PopularMovies,
     val upComing: PopularMovies,
+    val pagerMovies: PopularMovies,
     val popularMoviesSize: Int = 0
 )
