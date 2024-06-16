@@ -24,7 +24,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -60,13 +59,14 @@ fun HomeScreen(homeViewModel: HomeViewModel= viewModel(factory = HomeViewModel.F
     val state: ScreenState by  homeViewModel.state.collectAsState()
     val coroutine: CoroutineScope = rememberCoroutineScope()
 
-    StateHandler(state, coroutine)
+    StateHandler(state, coroutine, homeViewModel)
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SuccessHandler(
     homeScreenState: HomeScreenState,
     coroutine: CoroutineScope,
+    homeViewModel: HomeViewModel,
     modifier: Modifier = Modifier
 ) {
 
@@ -175,11 +175,12 @@ fun RowMoviesDisplay(
                        .padding(start = 1.dp, end = 5.dp)
                        .aspectRatio(0.5f)
                        .clickable {
-                          coroutine.launch {
-                              pagerState
-                                  .animateScrollToPage(index)
-                          }
-                       },
+                           coroutine.launch {
+                               pagerState
+                                   .animateScrollToPage(index)
+                           }
+                       }
+                   ,
                    colors = CardDefaults.elevatedCardColors(
                        containerColor = Color.Unspecified
                    ),
@@ -199,13 +200,13 @@ fun RowMoviesDisplay(
 
 
 @Composable
-fun StateHandler(state: ScreenState, coroutine: CoroutineScope){
+fun StateHandler(state: ScreenState, coroutine: CoroutineScope,  homeViewModel: HomeViewModel,){
     when(state){
         is Loading -> Icon(
             painter = painterResource(id = R.drawable.progess),
             contentDescription = null
         )
-        is Success -> SuccessHandler(state.homeScreenState, coroutine)
+        is Success -> SuccessHandler(state.homeScreenState, coroutine, homeViewModel)
         is Error -> Icon(
             painter = painterResource(id = R.drawable.warning),
             contentDescription = null
