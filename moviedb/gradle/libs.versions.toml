@@ -12,6 +12,10 @@ retrofitVersion = "2.11.0"
 scalarConverterVersion = "2.9.0"
 pluginSerialization = "1.9.21"
 coilVersion = "2.6.0"
+navVersion = "2.7.7"
+jsonSerializationVersion = "1.5.0"
+retrofitKotlinxVersion = "1.0.0"
+okhttpVersion = "4.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +36,11 @@ androidx-retrofit = {group = "com.squareup.retrofit2", name = "retrofit", versio
 androidx-scalar-converter = {group = "com.squareup.retrofit2", name = "converter-scalars", version.ref = "scalarConverterVersion"}
 androidx-lifecycle-compose = {group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx"}
 androidx-coil = {group ="io.coil-kt", name = "coil-compose", version.ref = "coilVersion"}
+andriodx-navidation = {group = "androidx.navigation", name = "navigation-fragment", version.ref = "navVersion"}
+andriodx-navigation-ui = {group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navVersion"}
+jetbrains-kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "jsonSerializationVersion"}
+retrofit-kotlinx-serialization = {group = "com.jakewharton.retrofit", name = "retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxVersion"}
+squareup-okhttp3 = {group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion"}
 
 
 [plugins]

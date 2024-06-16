@@ -64,11 +64,11 @@ dependencies {
     implementation(libs.androidx.scalar.converter)
     implementation(libs.androidx.lifecycle.compose)
     implementation(libs.androidx.coil)
-
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
-    implementation("com.squareup.okhttp3:okhttp:4.11.0")
-
+    implementation(libs.jetbrains.kotlinx.serialization)
+    implementation(libs.retrofit.kotlinx.serialization)
+    implementation(libs.squareup.okhttp3)
+    implementation(libs.andriodx.navidation)
+    implementation(libs.andriodx.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
