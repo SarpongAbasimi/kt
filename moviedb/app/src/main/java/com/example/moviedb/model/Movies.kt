@@ -34,5 +34,6 @@ data class Dates(
 @Serializable
 data class PopularMovies(
     val page: Int,
-    val results: List<PopularMoviesResult>
+    val results: List<PopularMoviesResult>,
+    val dates: Dates? = null
 )
