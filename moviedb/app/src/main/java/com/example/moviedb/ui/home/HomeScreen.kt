@@ -57,7 +57,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     homeViewModel: HomeViewModel= viewModel(factory = HomeViewModel.Factory),
-    handleDetailNavigation: () -> Unit = {}
+    handleDetailNavigation: (movieId: Int) -> Unit = {}
 ){
     val state: ScreenState by  homeViewModel.state.collectAsState()
     val coroutine: CoroutineScope = rememberCoroutineScope()
@@ -70,7 +70,7 @@ fun SuccessHandler(
     homeScreenState: HomeScreenState,
     coroutine: CoroutineScope,
     homeViewModel: HomeViewModel,
-    handleDetailNavigation: () -> Unit,
+    handleDetailNavigation: (movieId: Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -174,7 +174,7 @@ fun RowMoviesDisplay(
     title: String,
     coroutine: CoroutineScope,
     pagerState: PagerState,
-    handleDetailNavigation: () -> Unit,
+    handleDetailNavigation: (movieId: Int) -> Unit,
     modifier: Modifier = Modifier,
 ){
    Column(modifier.fillMaxSize()) {
@@ -201,8 +201,8 @@ fun RowMoviesDisplay(
                        .aspectRatio(0.5f)
                        .clickable {
                            coroutine.launch {
-                               pagerState.animateScrollToPage(index)
-                               handleDetailNavigation()
+//                               pagerState.animateScrollToPage(index)
+                               handleDetailNavigation(movieResult.id)
                            }
                        }
                    ,
@@ -229,7 +229,7 @@ fun StateHandler(
     state: ScreenState,
     coroutine: CoroutineScope,
     homeViewModel: HomeViewModel,
-    handleDetailNavigation: () -> Unit
+    handleDetailNavigation: (movieId: Int) -> Unit
 ){
     when(state){
         is Loading -> Icon(

@@ -24,7 +24,7 @@ fun NavHandler(navController: NavHostController = rememberNavController()){
         {
             HomeScreen(
                 handleDetailNavigation = {
-                    navController.navigate("$detailRoute/1")
+                    navController.navigate("$detailRoute/$it")
                 }
             )
         }
