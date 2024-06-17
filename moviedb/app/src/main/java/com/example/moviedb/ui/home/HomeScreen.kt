@@ -55,11 +55,14 @@ import kotlinx.coroutines.launch
 
 
 @Composable
-fun HomeScreen(homeViewModel: HomeViewModel= viewModel(factory = HomeViewModel.Factory)){
+fun HomeScreen(
+    homeViewModel: HomeViewModel= viewModel(factory = HomeViewModel.Factory),
+    handleDetailNavigation: () -> Unit = {}
+){
     val state: ScreenState by  homeViewModel.state.collectAsState()
     val coroutine: CoroutineScope = rememberCoroutineScope()
 
-    StateHandler(state, coroutine, homeViewModel)
+    StateHandler(state, coroutine, homeViewModel, handleDetailNavigation)
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -67,6 +70,7 @@ fun SuccessHandler(
     homeScreenState: HomeScreenState,
     coroutine: CoroutineScope,
     homeViewModel: HomeViewModel,
+    handleDetailNavigation: () -> Unit,
     modifier: Modifier = Modifier
 ) {
 
@@ -90,6 +94,7 @@ fun SuccessHandler(
             "Most Popular",
             coroutine,
             pagerState,
+            handleDetailNavigation,
             Modifier.weight(1f)
         )
 
@@ -98,6 +103,7 @@ fun SuccessHandler(
             "Top Rated",
             coroutine,
             pagerState,
+            handleDetailNavigation,
             Modifier.weight(1f)
         )
 
@@ -106,6 +112,7 @@ fun SuccessHandler(
             "Discover",
             coroutine,
             pagerState,
+            handleDetailNavigation,
             Modifier.weight(1f)
         )
 
@@ -114,6 +121,7 @@ fun SuccessHandler(
             "Now Playing",
             coroutine,
             pagerState,
+            handleDetailNavigation,
             Modifier.weight(1f)
         )
     }
@@ -166,6 +174,7 @@ fun RowMoviesDisplay(
     title: String,
     coroutine: CoroutineScope,
     pagerState: PagerState,
+    handleDetailNavigation: () -> Unit,
     modifier: Modifier = Modifier,
 ){
    Column(modifier.fillMaxSize()) {
@@ -192,8 +201,8 @@ fun RowMoviesDisplay(
                        .aspectRatio(0.5f)
                        .clickable {
                            coroutine.launch {
-                               pagerState
-                                   .animateScrollToPage(index)
+                               pagerState.animateScrollToPage(index)
+                               handleDetailNavigation()
                            }
                        }
                    ,
@@ -216,13 +225,23 @@ fun RowMoviesDisplay(
 
 
 @Composable
-fun StateHandler(state: ScreenState, coroutine: CoroutineScope,  homeViewModel: HomeViewModel,){
+fun StateHandler(
+    state: ScreenState,
+    coroutine: CoroutineScope,
+    homeViewModel: HomeViewModel,
+    handleDetailNavigation: () -> Unit
+){
     when(state){
         is Loading -> Icon(
             painter = painterResource(id = R.drawable.progess),
             contentDescription = null
         )
-        is Success -> SuccessHandler(state.homeScreenState, coroutine, homeViewModel)
+        is Success -> SuccessHandler(
+            state.homeScreenState,
+            coroutine,
+            homeViewModel,
+            handleDetailNavigation
+        )
         is Error -> Icon(
             painter = painterResource(id = R.drawable.warning),
             contentDescription = null

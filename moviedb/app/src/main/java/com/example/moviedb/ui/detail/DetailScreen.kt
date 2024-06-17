@@ -6,8 +6,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.moviedb.ui.theme.MoviedbTheme
 
 @Composable
-fun DetailsScreen(){
-    Text(text = "Hello")
+fun DetailsScreen(id: String? = ""){
+    Text(text = "Hello, movie id is $id")
 }
 
 @Preview(showBackground = true)
