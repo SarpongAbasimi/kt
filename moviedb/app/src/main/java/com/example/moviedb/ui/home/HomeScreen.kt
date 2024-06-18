@@ -246,6 +246,10 @@ fun StateHandler(
             painter = painterResource(id = R.drawable.warning),
             contentDescription = null
         )
+        else -> Icon(
+            painter = painterResource(id = R.drawable.warning),
+            contentDescription = null
+        )
     }
 }
 
