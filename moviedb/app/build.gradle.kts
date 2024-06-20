@@ -65,7 +65,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.compose)
     implementation(libs.androidx.coil)
     implementation(libs.jetbrains.kotlinx.serialization)
-//    implementation(libs.retrofit.kotlinx.serialization)
+    implementation(libs.retrofit.kotlinx.serialization)
     implementation(libs.squareup.okhttp3)
     implementation(libs.andriodx.navigation)
     implementation(libs.andriodx.navigation.ui)

@@ -30,7 +30,6 @@ fun NavHandler(navController: NavHostController = rememberNavController()){
         }
 
         composable("$detailRoute/{id}"){navBackStackEntry ->
-            val id = navBackStackEntry.arguments?.getString("id")
             DetailsScreen()
         }
     }

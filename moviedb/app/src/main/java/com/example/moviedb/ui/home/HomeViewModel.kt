@@ -23,7 +23,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 
-class HomeViewModel(val transformer: Transformer): ViewModel() {
+class HomeViewModel(val transformer: Transformer, val movies: com.example.moviedb.service.Movies): ViewModel() {
     private val _state = MutableStateFlow<ScreenState>(Loading)
     val state: StateFlow<ScreenState> = _state.asStateFlow()
 
@@ -36,10 +36,16 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
         viewModelScope.launch {
             try {
                 _state.update {
-                    val popularMovies = getData(Movies.popular)
-                    val nowPlaying = getData(Movies.nowPlaying)
-                    val topRated = getData(Movies.topRated)
-                    val upComing = getData(Movies.upComing)
+
+                    val popularMovies = movies.popular()
+                    val nowPlaying = movies.nowPlaying()
+                    val topRated = movies.topRated()
+                    val upComing = movies.upComing()
+
+//                    val popularMovies = getData(Movies.popular)
+//                    val nowPlaying = getData(Movies.nowPlaying)
+//                    val topRated = getData(Movies.topRated)
+//                    val upComing = getData(Movies.upComing)
                     val moviesList =  listOf(popularMovies, nowPlaying, topRated, upComing)
 
                     Success(
@@ -76,7 +82,7 @@ class HomeViewModel(val transformer: Transformer): ViewModel() {
             initializer {
                  val container = (this[APPLICATION_KEY] as ApplicationContainer).container
 
-                HomeViewModel(container.transformer)
+                HomeViewModel(container.transformer, container.movies)
             }
         }
     }

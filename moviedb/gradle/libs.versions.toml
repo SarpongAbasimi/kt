@@ -39,7 +39,7 @@ androidx-coil = {group ="io.coil-kt", name = "coil-compose", version.ref = "coil
 andriodx-navigation = {group = "androidx.navigation", name = "navigation-fragment", version.ref = "navVersion"}
 andriodx-navigation-ui = {group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navVersion"}
 jetbrains-kotlinx-serialization = {group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "jsonSerializationVersion"}
-#retrofit-kotlinx-serialization = {group = "com.jakewharton.retrofit", name = "retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxVersion"}
+retrofit-kotlinx-serialization = {group = "com.jakewharton.retrofit", name = "retrofit2-kotlinx-serialization-converter", version.ref = "retrofitKotlinxVersion"}
 squareup-okhttp3 = {group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttpVersion"}
 androidx-navigation-compose = {group = "androidx.navigation", name = "navigation-compose", version.ref = "navVersion"}
 
