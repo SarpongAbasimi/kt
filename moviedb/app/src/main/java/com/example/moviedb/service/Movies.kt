@@ -1,5 +1,6 @@
 package com.example.moviedb.service
 
+import com.example.moviedb.model.MovieDetails
 import com.example.moviedb.model.PopularMovies
 
 interface Movies {
@@ -7,6 +8,7 @@ interface Movies {
     suspend fun nowPlaying(): PopularMovies
     suspend fun topRated(): PopularMovies
     suspend fun upComing(): PopularMovies
+    suspend fun getMovie(id: Int): MovieDetails
 }
 
 class MoviesService(private val movieDB: MovieDB): Movies {
@@ -24,5 +26,9 @@ class MoviesService(private val movieDB: MovieDB): Movies {
 
     override suspend fun upComing(): PopularMovies{
         return movieDB.upComing()
+    }
+
+    override suspend fun getMovie(id: Int): MovieDetails {
+        return movieDB.getMovie(id)
     }
 }

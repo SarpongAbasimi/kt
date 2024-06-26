@@ -31,7 +31,7 @@ object RetrofitClient : RetrofitClientBuilder {
                 val request: Request = chain.request()
                     .newBuilder()
                     .header("accept", "application/json")
-                    .header("Authorization", "${apiKey.value}")
+                    .header("Authorization", "Bearer ${apiKey.value}")
                     .build()
                 return chain.proceed(request)
             }

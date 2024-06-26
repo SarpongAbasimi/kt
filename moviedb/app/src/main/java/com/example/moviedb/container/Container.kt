@@ -17,7 +17,7 @@ interface Container {
 
 object DefaultContainer : Container {
     private val baseUrl: BaseUrl = BaseUrl("https://api.themoviedb.org/3/")
-    private val apiKey: ApiKey = ApiKey("")
+
     private val movieDb = Api.api(baseUrl, apiKey)
 
     override val fileReader: FileReader = FileReaderService()

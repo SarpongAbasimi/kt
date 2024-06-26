@@ -50,8 +50,8 @@ data class Genre(
 data class MovieDetails(
     @SerialName(value = "backdrop_path")
     val backdropPath: String,
-    @SerialName(value = "belongs_to_collection")
-    val belongsToCollection: BelongsToCollection,
+//    @SerialName(value = "belongs_to_collection")
+//    val belongsToCollection: BelongsToCollection,
     val budget: Int,
     @SerialName(value = "origin_country")
     val originCountry: List<String>,
