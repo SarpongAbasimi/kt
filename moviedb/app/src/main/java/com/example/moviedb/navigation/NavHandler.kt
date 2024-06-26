@@ -30,7 +30,7 @@ fun NavHandler(navController: NavHostController = rememberNavController()){
         }
 
         composable("$detailRoute/{id}"){navBackStackEntry ->
-            DetailsScreen()
+            DetailsScreen({ navController.popBackStack() })
         }
     }
 }

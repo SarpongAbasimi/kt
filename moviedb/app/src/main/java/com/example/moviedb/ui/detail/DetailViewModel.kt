@@ -22,7 +22,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
-    val transformer: Transformer,
     val savedStateHandle: SavedStateHandle,
     val movies: com.example.moviedb.service.Movies
 ): ViewModel() {
@@ -38,9 +37,6 @@ class DetailViewModel(
         viewModelScope.launch {
             try {
                 _uiState.update {
-//                    val encode = transformer.encode(Movies.movieDetails)
-//                    val decode: MovieDetails = transformer.decodeDetails(encode)
-
                     val result = movies.getMovie(id.toInt())
                     DetailsSuccess(result)
                 }
@@ -56,7 +52,7 @@ class DetailViewModel(
             initializer {
                 val container = (this[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY] as ApplicationContainer).container
 
-                DetailViewModel(container.transformer ,this.createSavedStateHandle(),container.movies)
+                DetailViewModel(this.createSavedStateHandle(),container.movies)
 
             }
         }
